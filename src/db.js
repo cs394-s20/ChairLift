@@ -13,6 +13,6 @@ var firebaseConfig = {
   };
 
 firebase.initializeApp(firebaseConfig);
-const db = firebase.database().ref("ride1");
+const db = firebase.database().ref("rides");
 
 export default db;

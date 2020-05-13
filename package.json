@@ -8,6 +8,8 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@material-ui/core": "^4.9.14",
+    "@material-ui/icons": "^4.9.1",
     "@react-native-firebase/app": "^6.7.1",
     "expo": "~37.0.3",
     "expo-font": "~8.1.0",

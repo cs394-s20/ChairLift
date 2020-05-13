@@ -12,15 +12,11 @@ export default function App() {
     const handleData = snap => {
       if (snap.val()) {
         setRides(snap.val());
-        console.log("loaded this: ", snap.val());
       } 
     }
     db.on('value', handleData, error => alert(error));
-    console.log("here is rides", rides);
     return () => { db.off('value', handleData); };
   }, []);
-
-  console.log("rides: ", rides);
   
   return (
     <View style={styles.container}>

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Ride from './src/Ride.js';
 import RideList from './src/RideList.js';
 import db from './src/db.js';
+import {Header, Title} from 'native-base';
 
 export default function App() {
 
@@ -20,8 +21,10 @@ export default function App() {
   
   return (
     <View style={styles.container}>
-      <Text>Welcome to Chairlift!</Text>
-      <RideList ridesState={{rides, setRides}}></RideList>
+      <Header style={{width:"100%"}}>
+      <Title>Welcome to Chairlift!</Title>
+      </Header>
+      <RideList style={styles.backdrop} ridesState={{rides, setRides}}></RideList>
     </View>
   );
 }
@@ -32,5 +35,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  }
 });

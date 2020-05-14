@@ -20,20 +20,31 @@ export default function App() {
   }, []);
   
   return (
-    <View style={styles.container}>
-      <Header style={{width:"100%"}}>
-      <Title>Welcome to Chairlift!</Title>
+    <View style={styles.main}>
+      <Header style={styles.header}>
+        <Title>Welcome to Chairlift!</Title>
       </Header>
-      <RideList style={styles.backdrop} ridesState={{rides, setRides}}></RideList>
+      <View style={styles.container}>
+        <RideList style={styles.backdrop} ridesState={{rides, setRides}}></RideList>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  main: {
+    flex: 1
+  },
+
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
+  },
+
+  header: {
+    backgroundColor: '#D7DAE5',
+    width: "100%"
   }
 });

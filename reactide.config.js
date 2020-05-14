@@ -14,6 +14,7 @@ module.exports = {
     path: path.resolve(__dirname, './reactide'),
     filename: 'bundle.js'
   },
+  assets: ['./assets/fonts/'],
   devServer: {
     port: 8085,
     proxy: [{

@@ -20,16 +20,15 @@ const RideList = ({ridesState}) => {
     }
 
     return (
-      <Container>
+      <Container style={styles.container}>
         <Content>
           <List>
           {
-
-            rides.map(ride => (
-                <ListItem> 
-                  <Ride ride={ride}></Ride>
-                </ListItem>   )
-            ) 
+          rides.map(ride => (
+              <ListItem style={styles.item}> 
+                <Ride ride={ride}></Ride>
+              </ListItem>   )
+          ) 
           }   
           </List>
         </Content>
@@ -37,5 +36,17 @@ const RideList = ({ridesState}) => {
     )
 
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#b2b9bf"
+
+  },
+  item: {
+    borderBottomWidth: 0,
+    paddingBottom: 2,
+    backgroundColor: "transparent"
+  }
+});
 
 export default RideList; 

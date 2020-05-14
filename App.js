@@ -22,7 +22,7 @@ export default function App() {
   return (
     <View style={styles.main}>
       <Header style={styles.header}>
-        <Title>Welcome to Chairlift!</Title>
+        <Title style={styles.title}>Chairlift</Title>
       </Header>
       <View style={styles.container}>
         <RideList style={styles.backdrop} ridesState={{rides, setRides}}></RideList>
@@ -38,13 +38,18 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center'
   },
 
+  title: {
+    fontSize: 32,
+     color: "#EDF0F5"
+
+  },
+
   header: {
-    backgroundColor: '#D7DAE5',
+    backgroundColor: '#19647E',
     width: "100%"
   }
 });

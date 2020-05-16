@@ -7,11 +7,7 @@ const Ride = (rideObj) => {
     const [modalVisible, setModalVisible] = useState(false);
     console.log(modalVisible);
     return (
-      <Card style={styles.container}
-            button onPress={() => {
-              console.log("card was pressed");
-              setModalVisible(true);} }
-      >
+      <Card style={styles.container}>
         <RideModal modalVisibleState = { { modalVisible, setModalVisible } } rideObj = {rideObj}></RideModal>
         <CardItem header bordered style={styles.cardItems}
                   button onPress={() => {setModalVisible(true);}}
@@ -21,7 +17,8 @@ const Ride = (rideObj) => {
           <Text> (0.5 mi away) <Icon style={styles.arrow} type="FontAwesome" name="arrow-right" /> {rideObj.ride.endLoc}</Text> 
         </CardItem>
         <CardItem style={styles.cardItems}
-          button onPress={() => {console.log("cardItem");}}>
+                  button onPress={() => {setModalVisible(true);}}
+        >
           <Body>
             <Text>
               Departure: {rideObj.ride.departTime}, {rideObj.ride.departDate}
@@ -34,7 +31,8 @@ const Ride = (rideObj) => {
           </Body>
         </CardItem>
         <CardItem style={styles.cardItems}
-        button onPress={() => {console.log("cardItem");}}>
+                  button onPress={() => {setModalVisible(true);}}
+        >
           <Body>
             <Text>Seats Remaining: {rideObj.ride.seatsLeft} </Text>
           </Body>

@@ -1,9 +1,9 @@
 import React, { Component, useState, useEffect} from 'react';
 import { Alert, Modal, StyleSheet, Text, TouchableHighlight, View } from "react-native";
 import { Container, Header, Content, List, ListItem, Card, CardItem, Icon, Body } from 'native-base';
+import { Col, Row, Grid } from 'react-native-easy-grid';
 
 const RideModal = ({ modalVisibleState, rideObj }) => {
-    console.log("rideObj:", rideObj);
     return (
         <Modal
           animationType="slide"
@@ -12,18 +12,45 @@ const RideModal = ({ modalVisibleState, rideObj }) => {
 
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
+            <Text style={styles.details} >Ride Details</Text>
+            <TouchableHighlight
+                style={styles.closeButton}
+                onPress={() => {
+                  modalVisibleState.setModalVisible(!modalVisibleState.modalVisible);
+                }}
+              >
+                <Icon type="FontAwesome" name="remove"/>
+              </TouchableHighlight>
                 <Card transparent>
                     <CardItem style={styles.cardItems}>
-                        <Body style={styles.profile}>
-                            <Text><Icon type="FontAwesome" name="user"/></Text>
-                            <Text>{rideObj.ride.name} <Icon style = {styles.star} type="FontAwesome" name="star"/><Icon style = {styles.star} type="FontAwesome" name="star"/><Icon style = {styles.star} type="FontAwesome" name="star"/></Text>
-                        </Body>
-                        <Body>
-                            <Text>Honda Accord, white</Text>
-                        </Body>
+                        <Grid>
+                          <Col style = {styles.user}>
+                            <Text><Icon style = {styles.userIcon} type="FontAwesome" name="user"/></Text>
+                            <Text style={styles.phone}>
+                              <Icon style={styles.phoneIcon} type="FontAwesome" name="phone" />
+                              <Text>{rideObj.ride.phoneNum}</Text>
+                            </Text>
+                          </Col>
+                          <Col>
+                            <Text style={styles.driverName}>
+                              {rideObj.ride.name} 
+                            </Text>
+                            <Text>
+                              <Icon style = {styles.star} type="FontAwesome" name="star"/><Icon style = {styles.star} type="FontAwesome" name="star"/><Icon style = {styles.star} type="FontAwesome" name="star"/>
+                            </Text>
+                          </Col>
+                        </Grid>
+                      <Body style = {styles.car}>
+                          <Text>Honda Accord, white</Text>
+                      </Body>
                     </CardItem>
                 </Card>
                 <Card transparent>
+                    <CardItem style={styles.cardItems}>
+                      <Body>
+                      <Text> (0.5 mi away) <Icon style={styles.arrow} type="FontAwesome" name="arrow-right" /> {rideObj.ride.endLoc}</Text> 
+                      </Body>
+                    </CardItem>
                     <CardItem style={styles.cardItems}>
                         <Body>
                             <Text>Departure: {rideObj.ride.departTime}, {rideObj.ride.departDate}</Text>
@@ -41,20 +68,8 @@ const RideModal = ({ modalVisibleState, rideObj }) => {
                         <Body>
                             <Text>Note: {rideObj.ride.desc}</Text>
                         </Body>
-                        <Body>
-                            <Text><Icon style={styles.phone} type="FontAwesome" name="phone" /> {rideObj.ride.phoneNum}</Text>
-                        </Body>
                     </CardItem>
                 </Card>
-  
-              <TouchableHighlight
-                style={{ ...styles.openButton, backgroundColor: "#19647E" }}
-                onPress={() => {
-                  modalVisibleState.setModalVisible(!modalVisibleState.modalVisible);
-                }}
-              >
-                <Text style={styles.textStyle}>Back</Text>
-              </TouchableHighlight>
             </View>
           </View>
         </Modal>
@@ -73,7 +88,7 @@ const RideModal = ({ modalVisibleState, rideObj }) => {
       backgroundColor: "white",
       borderRadius: 20,
       padding: 35,
-      top: 60,
+      top: '11%',
       height: "100%",
       width: "100%",
       alignItems: "center",
@@ -86,19 +101,14 @@ const RideModal = ({ modalVisibleState, rideObj }) => {
       shadowRadius: 3.84,
       elevation: 5,
     },
-    openButton: {
-      backgroundColor: "#F194FF",
-      borderRadius: 20,
-      padding: 10,
-      elevation: 2,
+    closeButton: {
+      backgroundColor: "#FFFFFF",
+      left: '50%',
+      bottom: '2%',
     },
     textStyle: {
       color: "white",
       fontWeight: "bold",
-      textAlign: "center"
-    },
-    modalText: {
-      marginBottom: 15,
       textAlign: "center"
     },
     cardItems: {
@@ -106,11 +116,36 @@ const RideModal = ({ modalVisibleState, rideObj }) => {
         backgroundColor:"#EDF0F5",
     },
     phone: {
-        fontSize: 18
+        marginTop: '5%',
+        fontSize: 13
+    },
+    phoneIcon: {
+        fontSize: 18,
+    },
+    driverName: {
+      fontSize: 18,
+      marginBottom: '5%',
     },
     star: {
-        fontSize: 18
-    }
+        fontSize: 15,
+    },
+    user: {
+      marginRight: '-30%'
+    },
+    userIcon: {
+      fontSize: 60,
+    },
+    details: {
+      fontSize: 22,
+      marginBottom: '-5%',
+      fontWeight: 'bold',
+    },
+    car: {
+      marginRight: '-10%'
+    },
+    arrow: {
+    fontSize: 10
+  },
   });
   
   export default RideModal;

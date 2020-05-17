@@ -24,8 +24,8 @@ const RideList = ({ridesState}) => {
         <Content>
           <List>
           {
-          rides.map(ride => (
-              <ListItem style={styles.item}> 
+          rides.map((ride,index) => (
+              <ListItem key={index} style={styles.item}> 
                 <Ride ride={ride}></Ride>
               </ListItem>   )
           ) 

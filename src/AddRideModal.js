@@ -1,20 +1,63 @@
 import React, { Component, useState, useEffect} from 'react';
 import { Alert, Modal, StyleSheet, Text, TouchableHighlight, View } from "react-native";
-import { Container, Header, Content, List, ListItem, Card, CardItem, Icon, Body, Item, Input, DatePicker } from 'native-base';
+import { Container, Header, Content, List, ListItem, Card, CardItem, Icon, Body, Item, Input, DatePicker, Button } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
+import db from './db.js';
+import firebase from 'firebase/app';
+import 'firebase/database';
 
 const AddRideModal = ({ ridesState, addRideModalVisibleState }) => {
 
-    const getCurrentDate = () => {
+  const updateJSON = () => {
+    var newItemKey = db.push().key;
+    var item = {
+      "departDate": startDate,
+      "departTime": departTime, 
+      "desc": desc,
+      "endLoc": resort,
+      "name": name,
+      "phoneNum": phoneNum,
+      "returnDate": endDate,
+      "returnTime": returnTime,
+      "seatsLeft": seatsLeft,
+      "startLoc": departLoc
+    };
 
+    console.log(item);
+    const newDB = firebase.database().ref("rides/" + newItemKey).set(item);
+    addRideModalVisibleState.setAddRideModalVisible(!addRideModalVisibleState.addRideModalVisible);
+    return;
+  }
+
+    const getCurrentDate = () => {
       var date = new Date().getDate();
       var month = new Date().getMonth() + 1;
       var year = new Date().getFullYear();
+      console.log(date, month, year);
       return new Date(year, month, date);
     }
+
+    const getMaxDate = () => {
+      var date = new Date().getDate();
+      var month = new Date().getMonth() + 1;
+      var year = new Date().getFullYear() + 1;
+      console.log(date, month, year);
+      return new Date(year, month, date);
+    }
+
+    var maxDate = getMaxDate();
     var currDate = getCurrentDate();
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
+    const [name, setName] = useState("");
+    const [phoneNum, setPhoneNum] = useState("");
+    const [departLoc, setDepartLoc] = useState("");
+    const [departTime, setDepartTime] = useState("");
+    const [resort, setResort] = useState("");
+    const [returnTime, setReturnTime] = useState("");
+    const [desc, setDesc] = useState("");
+    const [seatsLeft, setSeatsLeft] = useState("");
+
     return (
         <Modal
           animationType="slide"
@@ -33,19 +76,19 @@ const AddRideModal = ({ ridesState, addRideModalVisibleState }) => {
                 <Icon type="FontAwesome" name="remove"/>
               </TouchableHighlight>
               <Item>
-                <Input placeholder='Name'/>
+                <Input placeholder='Name' onChangeText={(name) => {setName(name)}}/>
               </Item>
               <Item>
-                <Input placeholder='Phone Number'/>
+                <Input placeholder='Phone Number' onChangeText={(num) => {setPhoneNum(num)}}/>
               </Item>
               <Item>
-                <Input placeholder='Departure Location'/>
+                <Input placeholder='Departure Location' onChangeText={(loc) => {setDepartLoc(loc)}}/>
               </Item>
               
               <DatePicker
-                id="startDate"
-                defaultDate={currDate}
-                minimumDate={currDate}
+                defaultDate={new Date(2020, 5, 18)}
+                minimumDate={new Date(2020, 5, 18)}
+                maximumDate={new Date(2021, 5, 18)}
                 placeHolderText="Select departure date"
                 textStyle={{ color: "black" }}
                 placeHolderTextStyle={{ color: "#d3d3d3" }}
@@ -53,15 +96,14 @@ const AddRideModal = ({ ridesState, addRideModalVisibleState }) => {
                 >
               </DatePicker>
               <Item>
-                <Input placeholder='Departure Time'/>
+                <Input placeholder='Departure Time' onChangeText={(departTime) => {setDepartTime(departTime)}}/>
               </Item>
               <Item>
-                <Input placeholder='Resort'/>
+                <Input placeholder='Resort' onChangeText={(resort) => {setResort(resort)}}/>
               </Item>
               <DatePicker
-                id="endDate"
-                defaultDate={currDate}
-                minimumDate={currDate}
+                defaultDate={new Date(2020, 5, 18)}
+                minimumDate={new Date(2020, 5, 18)}
                 placeHolderText="Select return date"
                 textStyle={{ color: "black" }}
                 placeHolderTextStyle={{ color: "#d3d3d3" }}
@@ -69,14 +111,18 @@ const AddRideModal = ({ ridesState, addRideModalVisibleState }) => {
                 >
               </DatePicker>
               <Item>
-                <Input placeholder='Return Time'/>
+                <Input placeholder='Return Time' onChangeText={(returnTime) => {setReturnTime(returnTime)}}/>
               </Item>
               <Item>
-                <Input placeholder='Trip Description'/>
+                <Input placeholder='Trip Description' onChangeText={(desc) => {setDesc(desc)}}/>
               </Item>
               <Item>
-                <Input placeholder='Number of Available Seats'/>
+                <Input placeholder='Number of Available Seats' onChangeText={(num) => {setSeatsLeft(num)}}/>
               </Item>
+
+              <Button onPress = { () => updateJSON()}>
+                <Text>Add Ride</Text>
+              </Button>
             </View>
           </View>
         </Modal>

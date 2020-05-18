@@ -1,9 +1,20 @@
 import React, { Component, useState, useEffect} from 'react';
 import { Alert, Modal, StyleSheet, Text, TouchableHighlight, View } from "react-native";
-import { Container, Header, Content, List, ListItem, Card, CardItem, Icon, Body, Item, Input } from 'native-base';
+import { Container, Header, Content, List, ListItem, Card, CardItem, Icon, Body, Item, Input, DatePicker } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 
 const AddRideModal = ({ ridesState, addRideModalVisibleState }) => {
+
+    const getCurrentDate = () => {
+
+      var date = new Date().getDate();
+      var month = new Date().getMonth() + 1;
+      var year = new Date().getFullYear();
+      return new Date(year, month, date);
+    }
+    var currDate = getCurrentDate();
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
     return (
         <Modal
           animationType="slide"
@@ -22,10 +33,49 @@ const AddRideModal = ({ ridesState, addRideModalVisibleState }) => {
                 <Icon type="FontAwesome" name="remove"/>
               </TouchableHighlight>
               <Item>
-                <Input placeholder='First Name'/>
+                <Input placeholder='Name'/>
               </Item>
               <Item>
-                <Input placeholder='Last Name'/>
+                <Input placeholder='Phone Number'/>
+              </Item>
+              <Item>
+                <Input placeholder='Departure Location'/>
+              </Item>
+              
+              <DatePicker
+                id="startDate"
+                defaultDate={currDate}
+                minimumDate={currDate}
+                placeHolderText="Select departure date"
+                textStyle={{ color: "black" }}
+                placeHolderTextStyle={{ color: "#d3d3d3" }}
+                onDateChange={(startDate) => {setStartDate(startDate)}}
+                >
+              </DatePicker>
+              <Item>
+                <Input placeholder='Departure Time'/>
+              </Item>
+              <Item>
+                <Input placeholder='Resort'/>
+              </Item>
+              <DatePicker
+                id="endDate"
+                defaultDate={currDate}
+                minimumDate={currDate}
+                placeHolderText="Select return date"
+                textStyle={{ color: "black" }}
+                placeHolderTextStyle={{ color: "#d3d3d3" }}
+                onDateChange={(endDate) => {setEndDate(endDate)}}
+                >
+              </DatePicker>
+              <Item>
+                <Input placeholder='Return Time'/>
+              </Item>
+              <Item>
+                <Input placeholder='Trip Description'/>
+              </Item>
+              <Item>
+                <Input placeholder='Number of Available Seats'/>
               </Item>
             </View>
           </View>

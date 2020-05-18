@@ -27,7 +27,7 @@ export default function App() {
       <Header style={styles.header}>
         <Title style={styles.title}>Chairlift</Title>
         <Button style={styles.addRideModal} onPress={() => {setAddRideModalVisible(true)}}>
-          <Text>Add Ride</Text>
+          <Text>+</Text>
         </Button>
         <AddRideModal ridesState={{rides, setRides}} addRideModalVisibleState = {{ addRideModalVisible, setAddRideModalVisible}}/> 
       </Header>
@@ -61,7 +61,9 @@ const styles = StyleSheet.create({
   }, 
 
   addRideModal: {
-    width: "100%",
+    width: "10%",
+    position: 'absolute',
+    right: 16,
     backgroundColor:"#EDF0F5"
   },
 });

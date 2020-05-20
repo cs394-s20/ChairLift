@@ -6,7 +6,7 @@ import db from './db.js';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
-const AddRideModal = ({ ridesState, addRideModalVisibleState }) => {
+const AddRideModal = ({ ridesState }) => {
 
   const updateJSON = () => {
     var newItemKey = db.push().key;
@@ -25,7 +25,6 @@ const AddRideModal = ({ ridesState, addRideModalVisibleState }) => {
 
     console.log(item);
     const newDB = firebase.database().ref("rides/" + newItemKey).set(item);
-    addRideModalVisibleState.setAddRideModalVisible(!addRideModalVisibleState.addRideModalVisible);
     return;
   }
 
@@ -59,22 +58,9 @@ const AddRideModal = ({ ridesState, addRideModalVisibleState }) => {
     const [seatsLeft, setSeatsLeft] = useState("");
 
     return (
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={addRideModalVisibleState.addRideModalVisible}>
-
+      <Container>
           <View style={styles.centeredView}>
-            <View style={styles.modalView}>
             <Text style={styles.details} >Add Ride</Text>
-            <TouchableHighlight
-                style={styles.closeButton}
-                onPress={() => {
-                  addRideModalVisibleState.setAddRideModalVisible(!addRideModalVisibleState.addRideModalVisible);
-                }}
-              >
-                <Icon type="FontAwesome" name="remove"/>
-              </TouchableHighlight>
               <Item>
                 <Input placeholder='Name' onChangeText={(name) => {setName(name)}}/>
               </Item>
@@ -124,8 +110,7 @@ const AddRideModal = ({ ridesState, addRideModalVisibleState }) => {
                 <Text>Add Ride</Text>
               </Button>
             </View>
-          </View>
-        </Modal>
+          </Container>
     );
   };
   

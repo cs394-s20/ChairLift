@@ -5,12 +5,14 @@ import RideList from './src/RideList.js';
 import AddRideModal from './src/AddRideModal.js';
 import db from './src/db.js';
 import {Header, Title, Button} from 'native-base';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import 'react-native-gesture-handler';
 
-export default function App() {
 
+function HomeScreen({ navigation }) {
   const [rides, setRides] = useState({});
   const [addRideModalVisible, setAddRideModalVisible] = useState(false);
-
 
   useEffect(() => {
     const handleData = snap => {
@@ -21,20 +23,39 @@ export default function App() {
     db.on('value', handleData, error => alert(error));
     return () => { db.off('value', handleData); };
   }, []);
-  
+
   return (
     <View style={styles.main}>
       <Header style={styles.header}>
         <Title style={styles.title}>Chairlift</Title>
-        <Button style={styles.addRideModal} onPress={() => {setAddRideModalVisible(true)}}>
+        <Button style={styles.addRideModal} onPress={() => navigation.navigate('AddRideModal')}>
           <Text>+</Text>
         </Button>
-        <AddRideModal ridesState={{rides, setRides}} addRideModalVisibleState = {{ addRideModalVisible, setAddRideModalVisible}}/> 
+        {/* <AddRideModal ridesState={{rides, setRides}} addRideModalVisibleState = {{ addRideModalVisible, setAddRideModalVisible}}/>  */}
       </Header>
       <View style={styles.container}>
         <RideList style={styles.backdrop} ridesState={{rides, setRides}}></RideList>
       </View>
     </View>
+  )
+}
+
+function AddRide() {
+  return (
+  <Text>Add a ride Here</Text>
+  )
+}
+
+export default function App() {
+  const Stack = createStackNavigator();
+  
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="AddRideModal" component={AddRideModal} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 

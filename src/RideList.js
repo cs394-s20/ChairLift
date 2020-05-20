@@ -50,3 +50,7 @@ const styles = StyleSheet.create({
 });
 
 export default RideList; 
+
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();

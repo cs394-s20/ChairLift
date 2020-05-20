@@ -30,11 +30,9 @@ const Ride = (rideObj) => {
           <Body>
             <Text>Seats Remaining: {rideObj.ride.seatsLeft} </Text>
           </Body>
-          <Body style={styles.moreInfoBtn}>
-            <TouchableOpacity onPress={() => {setModalVisible(true)}}>
+          <TouchableOpacity style={styles.moreInfoBtn} onPress={() => {setModalVisible(true)}}>
               <Text><Icon style={styles.plus} type="FontAwesome" name="plus" /></Text>
-            </TouchableOpacity>
-          </Body>
+          </TouchableOpacity>
         </CardItem>
       </View>
         
@@ -64,9 +62,9 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   moreInfoBtn: {
-    position: "relative",
-    right: 0,
-    bottom: 0
+    alignItems: 'flex-end',
+    marginRight: 6,
+    marginBottom: 6
   }
   
 });

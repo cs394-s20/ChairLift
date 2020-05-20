@@ -6,7 +6,7 @@ import db from './db.js';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
-const AddRideModal = ({ ridesState }) => {
+const AddRideModal = ({ ridesState, navigation }) => {
 
   const updateJSON = () => {
     var newItemKey = db.push().key;
@@ -25,6 +25,8 @@ const AddRideModal = ({ ridesState }) => {
 
     console.log(item);
     const newDB = firebase.database().ref("rides/" + newItemKey).set(item);
+
+    navigation.navigate('Home');
     return;
   }
 
@@ -59,8 +61,6 @@ const AddRideModal = ({ ridesState }) => {
 
     return (
       <Container>
-          <View style={styles.centeredView}>
-            <Text style={styles.details} >Add Ride</Text>
               <Item>
                 <Input placeholder='Name' onChangeText={(name) => {setName(name)}}/>
               </Item>
@@ -105,21 +105,24 @@ const AddRideModal = ({ ridesState }) => {
               <Item>
                 <Input placeholder='Number of Available Seats' onChangeText={(num) => {setSeatsLeft(num)}}/>
               </Item>
-
-              <Button onPress = { () => updateJSON()}>
-                <Text>Add Ride</Text>
+              <Button style={styles.centeredView} onPress = { () => updateJSON()}>
+                <Text style={styles.text} >Add Ride</Text>
               </Button>
-            </View>
+              
           </Container>
     );
   };
   
   const styles = StyleSheet.create({
     centeredView: {
-      flex: 1,
+      marginTop: 10,
       justifyContent: "center",
-      alignItems: "center",
-      marginTop: 22
+      backgroundColor: '#19647E'
+    },
+    text: {
+      color: "white",
+      fontSize: 20,
+      fontWeight: "bold"
     },
     modalView: {
       margin: 20,

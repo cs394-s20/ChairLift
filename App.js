@@ -4,7 +4,7 @@ import Ride from './src/Ride.js';
 import RideList from './src/RideList.js';
 import AddRideModal from './src/AddRideModal.js';
 import db from './src/db.js';
-import {Header, Title, Button} from 'native-base';
+import {Header, Title, Button, Icon} from 'native-base';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import 'react-native-gesture-handler';
@@ -29,7 +29,7 @@ function HomeScreen({ navigation }) {
       <Header style={styles.header}>
         <Title style={styles.title}>Chairlift</Title>
         <Button style={styles.addRideModal} onPress={() => navigation.navigate('AddRideModal')}>
-          <Text>+</Text>
+          <Text><Icon type="FontAwesome" name="plus" /><Icon type="FontAwesome" name="car" /></Text>
         </Button>
         {/* <AddRideModal ridesState={{rides, setRides}} addRideModalVisibleState = {{ addRideModalVisible, setAddRideModalVisible}}/>  */}
       </Header>
@@ -53,7 +53,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="AddRideModal" component={AddRideModal} />
+        <Stack.Screen name="AddRideModal" component={AddRideModal} options={{ title: 'Add a New Ride' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -82,9 +82,9 @@ const styles = StyleSheet.create({
   }, 
 
   addRideModal: {
-    width: "10%",
+    // width: "10%",
     position: 'absolute',
     right: 16,
-    backgroundColor:"#EDF0F5"
-  },
+    backgroundColor:"#484848"
+  }
 });

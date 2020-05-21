@@ -1,29 +1,29 @@
 import React, { Component, useState, useEffect} from 'react';
 import { Alert, Modal, StyleSheet, Text, TouchableHighlight, View } from "react-native";
-import { Container, Header, Content, List, ListItem, Card, CardItem, Icon, Body, Item, Input, DatePicker, Button } from 'native-base';
+import { Container, Header, Content, List, ListItem, Card, CardItem, Icon, Body, Item, Input, Button } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import db from './db.js';
 import firebase from 'firebase/app';
 import 'firebase/database';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const AddRideModal = ({ ridesState, navigation }) => {
 
   const updateJSON = () => {
     var newItemKey = db.push().key;
     var item = {
-      "departDate": startDate,
-      "departTime": departTime, 
+      "departDate": JSON.stringify(departDate).substring(1,11),
+      "departTime": JSON.stringify(departTime).substring(12,17), 
       "desc": desc,
       "endLoc": resort,
       "name": name,
       "phoneNum": phoneNum,
-      "returnDate": endDate,
-      "returnTime": returnTime,
+      "returnDate": JSON.stringify(returnDate).substring(1,11),
+      "returnTime": JSON.stringify(returnTime).substring(12,17),
       "seatsLeft": seatsLeft,
       "startLoc": departLoc
     };
 
-    console.log(item);
     const newDB = firebase.database().ref("rides/" + newItemKey).set(item);
 
     navigation.navigate('Home');
@@ -32,9 +32,8 @@ const AddRideModal = ({ ridesState, navigation }) => {
 
     const getCurrentDate = () => {
       var date = new Date().getDate();
-      var month = new Date().getMonth() + 1;
+      var month = new Date().getMonth();
       var year = new Date().getFullYear();
-      console.log(date, month, year);
       return new Date(year, month, date);
     }
 
@@ -42,25 +41,68 @@ const AddRideModal = ({ ridesState, navigation }) => {
       var date = new Date().getDate();
       var month = new Date().getMonth() + 1;
       var year = new Date().getFullYear() + 1;
-      console.log(date, month, year);
       return new Date(year, month, date);
     }
 
     var maxDate = getMaxDate();
     var currDate = getCurrentDate();
-    const [startDate, setStartDate] = useState("");
-    const [endDate, setEndDate] = useState("");
+    const [departDate, setDepartDate] = useState(currDate);
+    const [returnDate, setReturnDate] = useState(currDate);
     const [name, setName] = useState("");
     const [phoneNum, setPhoneNum] = useState("");
     const [departLoc, setDepartLoc] = useState("");
-    const [departTime, setDepartTime] = useState("");
+    const [departTime, setDepartTime] = useState(currDate);
     const [resort, setResort] = useState("");
-    const [returnTime, setReturnTime] = useState("");
+    const [returnTime, setReturnTime] = useState(currDate);
     const [desc, setDesc] = useState("");
     const [seatsLeft, setSeatsLeft] = useState("");
+    const [mode, setMode] = useState('date');
+    const [showDeptDate, setShowDeptDate] = useState(false);
+    const [showReturnDate, setShowReturnDate] = useState(false);
+    const [showDeptTime, setShowDeptTime] = useState(false);
+    const [showReturnTime, setShowReturnTime] = useState(false);
+
+
+    const onChangeDeptDate = (event, selectedDate) => {
+      setDepartDate(selectedDate);
+    };
+
+    const onChangeReturnDate = (event, selectedDate) => {
+      setReturnDate(selectedDate);
+    };
+
+    const onChangeDeptTime = (event, selectedTime) => {
+      console.log('dept time', selectedTime);
+      setDepartTime(selectedTime);
+    };
+
+    const onChangeReturnTime = (event, selectedTime) => {
+      setReturnTime(selectedTime);
+    };
+
+    const showDatepicker = (picker) => {
+      if(picker === 'dept'){
+        setShowDeptDate(!showDeptDate);
+
+      }else{
+        setShowReturnDate(!showReturnDate);
+      }
+    };
+
+    const showTimepicker = (picker) => {
+      if(picker === 'dept'){
+        setShowDeptTime(!showDeptTime);
+
+      }else{
+        setShowReturnTime(!showReturnTime);
+      }
+    };
+
+
 
     return (
       <Container>
+        <Content>
               <Item>
                 <Input placeholder='Name' onChangeText={(name) => {setName(name)}}/>
               </Item>
@@ -70,35 +112,89 @@ const AddRideModal = ({ ridesState, navigation }) => {
               <Item>
                 <Input placeholder='Departure Location' onChangeText={(loc) => {setDepartLoc(loc)}}/>
               </Item>
-              
-              <DatePicker
-                defaultDate={new Date(2020, 5, 18)}
-                minimumDate={new Date(2020, 5, 18)}
-                maximumDate={new Date(2021, 5, 18)}
-                placeHolderText="Select departure date"
-                textStyle={{ color: "black" }}
-                placeHolderTextStyle={{ color: "#d3d3d3" }}
-                onDateChange={(startDate) => {setStartDate(startDate)}}
-                >
-              </DatePicker>
-              <Item>
+
+              <View>
+                <View style = {styles.pickerView}>
+                    <Button style = {styles.pickerButton} onPress={() => showDatepicker('dept')} title="Show date picker!"><Text style = {styles.pickerText}>Depart Date: {JSON.stringify(departDate).substring(1,11)}</Text></Button>
+                </View>
+                <View>
+                  {showDeptDate && (
+                    <DateTimePicker
+                      testID="dateTimePicker"
+                      timeZoneOffsetInMinutes={0}
+                      value={departDate}
+                      mode={'date'}
+                      is24Hour={true}
+                      display="default"
+                      onChange={onChangeDeptDate}
+                    />
+                  )}
+                </View>
+                <View style = {styles.pickerView}>
+                  <Button style = {styles.pickerButton} onPress={() => showTimepicker('dept')} title="Show time picker!"><Text style = {styles.pickerText}>Depart Time: {JSON.stringify(departTime).substring(12,17)} </Text></Button>
+                </View>
+                <View>
+                  {showDeptTime && (
+                    <DateTimePicker
+                      testID="dateTimePicker"
+                      timeZoneOffsetInMinutes={0}
+                      value={departTime}
+                      mode={'time'}
+                      is24Hour={true}
+                      display="default"
+                      onChange={onChangeDeptTime}
+                    />
+                  )}
+                </View>
+
+              </View>
+
+              {/*<Item>
                 <Input placeholder='Departure Time' onChangeText={(departTime) => {setDepartTime(departTime)}}/>
-              </Item>
+              </Item>*/}
+
               <Item>
                 <Input placeholder='Resort' onChangeText={(resort) => {setResort(resort)}}/>
               </Item>
-              <DatePicker
-                defaultDate={new Date(2020, 5, 18)}
-                minimumDate={new Date(2020, 5, 18)}
-                placeHolderText="Select return date"
-                textStyle={{ color: "black" }}
-                placeHolderTextStyle={{ color: "#d3d3d3" }}
-                onDateChange={(endDate) => {setEndDate(endDate)}}
-                >
-              </DatePicker>
-              <Item>
+
+              <View>
+                <View style = {styles.pickerView}>
+                  <Button style = {styles.pickerButton} onPress={() => showDatepicker('return')} title="Show date picker!"><Text style = {styles.pickerText}>Return Date: {JSON.stringify(returnDate).substring(1,11)}</Text></Button>
+                </View>
+                <View>
+                  {showReturnDate && (
+                    <DateTimePicker
+                      testID="dateTimePicker"
+                      timeZoneOffsetInMinutes={0}
+                      value={returnDate}
+                      mode={'date'}
+                      is24Hour={true}
+                      display="default"
+                      onChange={onChangeReturnDate}
+                    />
+                  )}
+                </View>
+                <View style = {styles.pickerView}>
+                  <Button style = {styles.pickerButton} onPress={() => showTimepicker('return')} title="Show time picker!"><Text style = {styles.pickerText}>Return Time: {JSON.stringify(returnTime).substring(12,17)}</Text></Button>
+                </View>
+                <View>
+                  {showReturnTime && (
+                    <DateTimePicker
+                      testID="dateTimePicker"
+                      timeZoneOffsetInMinutes={0}
+                      value={returnTime}
+                      mode={'time'}
+                      is24Hour={true}
+                      display="default"
+                      onChange={onChangeReturnTime}
+                    />
+                  )}
+                </View>
+              </View>
+              {/*<Item>
                 <Input placeholder='Return Time' onChangeText={(returnTime) => {setReturnTime(returnTime)}}/>
-              </Item>
+              </Item>*/}
+
               <Item>
                 <Input placeholder='Trip Description' onChangeText={(desc) => {setDesc(desc)}}/>
               </Item>
@@ -109,6 +205,7 @@ const AddRideModal = ({ ridesState, navigation }) => {
                 <Text style={styles.text} >Add Ride</Text>
               </Button>
               
+              </Content>
           </Container>
     );
   };
@@ -190,6 +287,19 @@ const AddRideModal = ({ ridesState, navigation }) => {
     textBox: {
       width: "100%"
     },
+    pickerButton: {
+      backgroundColor: "white",
+      marginLeft: '2%',
+    },
+    pickerText: {
+      fontSize: 16,
+      color: "black"
+    },
+    pickerView: {
+      borderColor: "#D3D3D3",
+      borderStyle: "solid",
+      borderBottomWidth: 1
+    }
   });
   
   export default AddRideModal;

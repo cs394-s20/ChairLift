@@ -8,6 +8,8 @@ import {Header, Title, Button, Icon} from 'native-base';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import 'react-native-gesture-handler';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 
 function HomeScreen({ navigation }) {
@@ -22,6 +24,10 @@ function HomeScreen({ navigation }) {
     }
     db.on('value', handleData, error => alert(error));
     return () => { db.off('value', handleData); };
+  }, []);
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(user => {console.log("hello")});
   }, []);
 
   return (

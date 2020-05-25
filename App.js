@@ -6,44 +6,27 @@ import AddRideModal from './src/AddRideModal.js';
 import db from './src/db.js';
 import {Header, Title, Button, Icon} from 'native-base';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+// import { StackNavigator } from '@react-navigation/stack';
+import { createSwitchNavigator, createAppContainer } from 'react-navigation';
+
 import 'react-native-gesture-handler';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
-// const App = createAppContainer(createSwitchNavigator(
-//   {
-//     Loading,
-//     SignUp,
-//     Login,
-//     Main
-//   },
-//   {
-//     initialRouteName: 'Loading'
-//   }
-// ))
-const Loading = () => {
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged(user => {console.log("hello")});
-  }, []);
+import Main from './src/Main'
+import SignUp from './src/SignUp'
+import Loading from './src/Loading'
+import Login from './src/Login'
 
-  return (
-    <View>
-      <Text>Loading</Text>
-      <ActivityIndicator size="large" />
-    </View>
-  )
-};
-
-export default function App() {
-  const Stack = createStackNavigator();
-  
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Loading" component={Loading} />
-        {/* <Stack.Screen name="AddRideModal" component={AddRideModal} options={{ title: 'Add a New Ride' }} /> */}
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
+const App = createAppContainer(createSwitchNavigator(
+  {
+    Loading,
+    SignUp,
+    Main,
+    Login
+  },
+  {
+    initialRouteName: 'Loading'
+  }
+))
+export default App

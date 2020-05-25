@@ -5,26 +5,19 @@ import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
 import firebase from 'firebase/app';
 // require('firebase/auth')
 // import 'firebase/auth';
+import db from './db.js';
 
-const Loading = () => {
+const Loading = ({navigation}) => {
   useEffect(() => {
-    firebase.auth().onAuthStateChanged(console.log("hello"));
+    firebase.auth().onAuthStateChanged(user => {navigation.navigate(user ? 'Main' : 'SignUp')});
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View>
       <Text>Loading</Text>
       <ActivityIndicator size="large" />
     </View>
   )
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
-})
 
 export default Loading;

@@ -14,6 +14,8 @@ import 'firebase/auth';
 function HomeScreen({ navigation }) {
   const [rides, setRides] = useState({});
   const [addRideModalVisible, setAddRideModalVisible] = useState(false);
+  const [user, setUser] = useState(null);
+
 
   useEffect(() => {
     const handleData = snap => {
@@ -26,7 +28,10 @@ function HomeScreen({ navigation }) {
   }, []);
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged(user => {console.log("hello")});
+    setUser(firebase.auth());
+    console.log(user);
+    console.log(firebase.auth);
+    // firebase.auth().onAuthStateChanged(user => {console.log("hello")});
   }, []);
 
   return (

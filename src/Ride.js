@@ -8,19 +8,25 @@ import 'firebase/database';
 
 const Ride = (rideObj) => {
     const [modalVisible, setModalVisible] = useState(false);
-    console.log("user", rideObj.userState);
     const userState = rideObj.userState;
 
 
     const updateJSON = () => {
-      console.log("update");
-      
-      
+            
       var item = rideObj.ride;
-      console.log("item", item);
-      item["requested"][userState.user.currentUser.uid] = "pending";
-      const driver = item.driverID;
-      
+
+      const userID = userState.user.currentUser.uid ;
+
+      if(!("requested" in item)){
+        var newRequest = {[userID]: "pending"};
+        item["requested"] = newRequest;
+      }else{
+        var newRequest = {[userID]: "pending"};
+
+        item.requested = {...item.requested, ...newRequest} ;
+      }
+
+      const driver = item.driverID;      
       
       firebase.database().ref("users/" + driver + "/driverRides/" + item.rideID).set(item);
 

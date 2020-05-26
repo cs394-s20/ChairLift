@@ -19,7 +19,6 @@ const RideList = ({ridesState, userState}) => {
         rides = Object.values(ridesState.rides);
     }
 
-
     return (
       <Container style={styles.container}>
         <Content>

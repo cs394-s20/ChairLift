@@ -36,13 +36,18 @@ const Ride = (rideObj) => {
       <View style={styles.container}>
         <RideModal modalVisibleState = { { modalVisible, setModalVisible } } rideObj = {rideObj}></RideModal>
         <CardItem header bordered style={styles.cardItems}>
+          <Body>
           <Text style={styles.title}>
             {rideObj.ride.name}    
             </Text> 
           <Text> (0.5 mi away) <Icon style={styles.arrow} type="FontAwesome" name="arrow-right" /> {rideObj.ride.endLoc}</Text> 
+          </Body>
+          <Body>
           <Button style={styles.request} onPress={() => updateJSON()}>
-                <Text>Request</Text>
+                <Text style={styles.requestText}>Request</Text>
           </Button>
+          </Body>
+          
         </CardItem>
         <CardItem style={styles.cardItems}>
           <Body>
@@ -98,7 +103,15 @@ const styles = StyleSheet.create({
     marginBottom: 6
   },
   request: {
-    marginLeft: 120
+    position: 'absolute',
+    right: -6,
+    backgroundColor:"#19647E",
+    //#0fbf61
+    padding: 10
+  },
+  requestText: {
+    color:"white",
+    fontWeight:"bold"
   }
   
 });

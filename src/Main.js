@@ -12,10 +12,10 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 
 function HomeScreen({ navigation }) {
+
   const [rides, setRides] = useState({});
   const [addRideModalVisible, setAddRideModalVisible] = useState(false);
   const [user, setUser] = useState(null);
-
 
   useEffect(() => {
     const handleData = snap => {
@@ -29,8 +29,8 @@ function HomeScreen({ navigation }) {
 
   useEffect(() => {
     setUser(firebase.auth());
-    console.log(user);
-    console.log(firebase.auth);
+    //console.log(user);
+    //console.log(firebase.auth);
     // firebase.auth().onAuthStateChanged(user => {console.log("hello")});
   }, []);
 
@@ -38,7 +38,10 @@ function HomeScreen({ navigation }) {
     <View style={styles.main}>
       <Header style={styles.header}>
         <Title style={styles.title}>Chairlift</Title>
-        <Button style={styles.addRideModal} onPress={() => navigation.navigate('AddRideModal')}>
+        <Button style={styles.addRideModal} onPress={() => navigation.navigate('AddRideModal', 
+          {
+            userState: {user, setUser},
+          })}>
           <Text><Icon type="FontAwesome" name="plus" /><Icon type="FontAwesome" name="car" /></Text>
         </Button>
         {/* <AddRideModal ridesState={{rides, setRides}} addRideModalVisibleState = {{ addRideModalVisible, setAddRideModalVisible}}/>  */}

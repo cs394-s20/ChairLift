@@ -2,9 +2,30 @@ import React, { Component, useState, useEffect} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Container, Header, Content, List, ListItem, Card, CardItem, Icon, Body, Button } from 'native-base';
 import RideModal from './RideModal';
+import db from './db.js';
+import firebase from 'firebase/app';
+import 'firebase/database';
 
 const Ride = (rideObj) => {
     const [modalVisible, setModalVisible] = useState(false);
+    console.log("user", rideObj.userState);
+    const userState = rideObj.userState;
+
+
+    const updateJSON = () => {
+      console.log("update");
+      
+      
+      var item = rideObj.ride;
+      console.log("item", item);
+      item["requested"][userState.user.currentUser.uid] = "pending";
+      const driver = item.driverID;
+      
+      
+      firebase.database().ref("users/" + driver + "/driverRides/" + item.rideID).set(item);
+
+    };
+
     return (
       <View style={styles.container}>
         <RideModal modalVisibleState = { { modalVisible, setModalVisible } } rideObj = {rideObj}></RideModal>
@@ -13,6 +34,9 @@ const Ride = (rideObj) => {
             {rideObj.ride.name}    
             </Text> 
           <Text> (0.5 mi away) <Icon style={styles.arrow} type="FontAwesome" name="arrow-right" /> {rideObj.ride.endLoc}</Text> 
+          <Button style={styles.request} onPress={() => updateJSON()}>
+                <Text>Request</Text>
+          </Button>
         </CardItem>
         <CardItem style={styles.cardItems}>
           <Body>
@@ -30,6 +54,7 @@ const Ride = (rideObj) => {
           <Body>
             <Text>Seats Remaining: {rideObj.ride.seatsLeft} </Text>
           </Body>
+          
           <TouchableOpacity style={styles.moreInfoBtn} onPress={() => {setModalVisible(true)}}>
               <Text><Icon style={styles.plus} type="FontAwesome" name="plus" /></Text>
           </TouchableOpacity>
@@ -65,6 +90,9 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     marginRight: 6,
     marginBottom: 6
+  },
+  request: {
+    marginLeft: 120
   }
   
 });

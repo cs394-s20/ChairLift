@@ -5,15 +5,15 @@ import db from './db.js';
 
 export default class SignUp extends React.Component {
   state = { email: '', password: '', errorMessage: null }
-handleSignUp = () => {
-  // TODO: Firebase stuff...
-  console.log('handleSignUp')
-  firebase
-      .auth()
-      .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then(() => this.props.navigation.navigate('Main'))
-      .catch(error => this.setState({ errorMessage: error.message }))
-}
+  handleSignUp = () => {
+    // TODO: Firebase stuff...
+    console.log('handleSignUp')
+    firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .then(() => this.props.navigation.navigate('Main'))
+        .catch(error => this.setState({ errorMessage: error.message }))
+  }
 render() {
     return (
       <View style={styles.container}>

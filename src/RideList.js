@@ -12,12 +12,13 @@ import { Container, Header, Content, List, ListItem, Card } from 'native-base';
 //     },
 //   }));
 
-const RideList = ({ridesState}) => {
+const RideList = ({ridesState, userState}) => {
 
     var rides = [];
     if (ridesState.rides) {
         rides = Object.values(ridesState.rides);
     }
+
 
     return (
       <Container style={styles.container}>
@@ -26,7 +27,7 @@ const RideList = ({ridesState}) => {
           {
           rides.map((ride,index) => (
               <ListItem key={index} style={styles.item}> 
-                <Ride ride={ride}></Ride>
+                <Ride ride={ride} userState={userState}></Ride>
               </ListItem>   )
           ) 
           }   

@@ -14,6 +14,7 @@ const AddRideModal = ({ route, navigation }) => {
   const updateJSON = (userState) => {
     var newItemKey = db.push().key;
     var item = {
+      "rideID": newItemKey,
       "departDate": JSON.stringify(departDate).substring(1,11),
       "departTime": JSON.stringify(departTime).substring(12,17), 
       "desc": desc,
@@ -23,7 +24,9 @@ const AddRideModal = ({ route, navigation }) => {
       "returnDate": JSON.stringify(returnDate).substring(1,11),
       "returnTime": JSON.stringify(returnTime).substring(12,17),
       "seatsLeft": seatsLeft,
-      "startLoc": departLoc
+      "startLoc": departLoc,
+      "driverID": userState.user.currentUser.uid
+      
     };
 
     //push to rides

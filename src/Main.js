@@ -47,7 +47,7 @@ function HomeScreen({ navigation }) {
         {/* <AddRideModal ridesState={{rides, setRides}} addRideModalVisibleState = {{ addRideModalVisible, setAddRideModalVisible}}/>  */}
       </Header>
       <View style={styles.container}>
-        <RideList style={styles.backdrop} ridesState={{rides, setRides}}></RideList>
+        <RideList style={styles.backdrop} ridesState={{rides, setRides}} userState={{user, setUser}}></RideList>
       </View>
     </View>
   )

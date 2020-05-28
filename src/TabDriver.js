@@ -9,14 +9,24 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import RequestedRide from './RequestedRide.js'
 
-const TabDriver = ({rides, userState}) => {
+const TabDriver = ({dataState, userState}) => {
     const checkRides = () => {
-        if (rides){
-            console.log("has rides");
-            return rides.map((ride,index) => (
-                <ListItem key={index} style={styles.item}> 
-                    <RequestedRide ride={ride} userState={userState}></RequestedRide>
-                </ListItem>   ));
+        const driverID = userState.user.currentUser.uid;
+        console.log("dataState: ", dataState);
+        if (dataState.data.users[driverID]) {
+            if (dataState.data.users[driverID].driverRides) {
+                console.log(dataState.data.users[driverID].driverRides)
+                const rides = [dataState.data.users[driverID].driverRides];
+                console.log(rides);
+                return (
+                    rides.map((ride,index) => (
+                    <ListItem key={index} style={styles.item}> 
+                    {console.log(ride)}
+                    {console.log(index)}
+                        <RequestedRide theRide={ride} userState={userState}></RequestedRide>
+                    </ListItem>   ))
+                );
+            }
         }
         else {
             console.log("no rides");

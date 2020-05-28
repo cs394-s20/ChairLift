@@ -6,8 +6,12 @@ import db from './db.js';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
-const RequestedRide = (rideObj, userObj) => {
-
+const RequestedRide = ({ theRide, userState }) => {
+  console.log(theRide);
+  console.log(userState);
+  const driverID = userState.user.currentUser.uid;
+  const ride = Object.values(theRide)[0];
+  console.log(ride);
     return (
       <View style={styles.container}>
         <CardItem header bordered style={styles.cardItems}>
@@ -16,11 +20,11 @@ const RequestedRide = (rideObj, userObj) => {
               {/* have to change the name to passenger's name */}
             Passenger Name
           </Text> 
-          <Text> (0.5 mi away) <Icon style={styles.arrow} type="FontAwesome" name="arrow-right" /> {rideObj.ride.endLoc}</Text> 
+          <Text> (0.5 mi away) <Icon style={styles.arrow} type="FontAwesome" name="arrow-right" /> {ride.endLoc}</Text> 
           </Body>
           <Body>
           <Button style={styles.request} onPress={() => updateJSON()}>
-                <Text style={styles.requestText}>Request</Text>
+                <Text style={styles.requestText}>Confirm</Text>
           </Button>
           </Body>
           
@@ -28,18 +32,18 @@ const RequestedRide = (rideObj, userObj) => {
         <CardItem style={styles.cardItems}>
           <Body>
             <Text>
-              Departure: {rideObj.ride.departTime}, {rideObj.ride.departDate}
+              Departure: {ride.departTime}, {ride.departDate}
             </Text>
           </Body>
           <Body>
             <Text>
-              Return: {rideObj.ride.departTime}, {rideObj.ride.departDate}
+              Return: {ride.departTime}, {ride.departDate}
             </Text>
           </Body>
         </CardItem>
         <CardItem style={styles.cardItems}>
           <Body>
-            <Text>Seats Remaining: {rideObj.ride.seatsLeft} </Text>
+            <Text>Seats Remaining: {ride.seatsLeft} </Text>
           </Body>
           
           <TouchableOpacity style={styles.moreInfoBtn} onPress={() => {setModalVisible(true)}}>
@@ -48,7 +52,7 @@ const RequestedRide = (rideObj, userObj) => {
         </CardItem>
         <CardItem style={styles.cardItems}>
             <Body>
-                <Text>Note: {rideObj.ride.desc}</Text>
+                <Text>Note: {ride.desc}</Text>
             </Body>
         </CardItem>
       </View>

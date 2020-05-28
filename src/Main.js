@@ -15,10 +15,8 @@ import 'firebase/auth';
 function HomeScreen({ navigation }) {
 
   const [data, setData] = useState({});
-  const [rides, setRides] = useState({});
   const [addRideModalVisible, setAddRideModalVisible] = useState(false);
   const [user, setUser] = useState(null);
-
   useEffect(() => {
     const handleData = snap => {
       if (snap.val()) {

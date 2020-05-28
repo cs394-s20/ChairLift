@@ -14,23 +14,13 @@ import TabPassenger from './TabPassenger';
 const MyRides = ({route, navigation}) => {
     const { dataState } = route.params;
     const { userState } = route.params;
-    const driverID = userState.user.currentUser.uid;
     const [driverRides, setDriverRides] = useState(null);
-
-    if (dataState.data.users.driverID) {
-        if (dataState.data.users.driverID.driverRides) {
-             setDriverRides(dataState.data.users.driverID.driverRides);
-        }
-    }
-    console.log("driverID", driverID);
-    console.log(dataState.data.users.driverID);
-    console.log(driverRides);
     return (
         <Container>
             <Content>
                 <Tabs>
                     <Tab heading = "TabDriver">
-                        <TabDriver rides={{driverRides, setDriverRides}} userObj={userState} />
+                        <TabDriver dataState={dataState} userState={userState} />
                     </Tab>
                     <Tab heading = "TabPassenger">
                         <TabPassenger rides={{driverRides, setDriverRides}} userObj={userState}/>

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Ride from './Ride.js';
 import RideList from './RideList.js';
 import AddRideModal from './AddRideModal.js';
+import MyRides from './MyRides.js';
 import db from './db.js';
 import {Header, Title, Button, Icon} from 'native-base';
 import { NavigationContainer } from '@react-navigation/native';
@@ -13,14 +14,13 @@ import 'firebase/auth';
 
 function HomeScreen({ navigation }) {
 
-  const [rides, setRides] = useState({});
+  const [data, setData] = useState({});
   const [addRideModalVisible, setAddRideModalVisible] = useState(false);
   const [user, setUser] = useState(null);
-
   useEffect(() => {
     const handleData = snap => {
       if (snap.val()) {
-        setRides(snap.val());
+        setData(snap.val());
       } 
     }
     db.on('value', handleData, error => alert(error));
@@ -33,10 +33,16 @@ function HomeScreen({ navigation }) {
     //console.log(firebase.auth);
     // firebase.auth().onAuthStateChanged(user => {console.log("hello")});
   }, []);
-
   return (
     <View style={styles.main}>
       <Header style={styles.header}>
+        <Button onPress={() => navigation.navigate('MyRides', 
+          {
+            dataState: {data, setData},
+            userState: {user, setUser},
+          })}>
+          <Text>My Rides</Text>
+        </Button>
         <Title style={styles.title}>Chairlift</Title>
         <Button style={styles.addRideModal} onPress={() => navigation.navigate('AddRideModal', 
           {
@@ -47,7 +53,7 @@ function HomeScreen({ navigation }) {
         {/* <AddRideModal ridesState={{rides, setRides}} addRideModalVisibleState = {{ addRideModalVisible, setAddRideModalVisible}}/>  */}
       </Header>
       <View style={styles.container}>
-        <RideList style={styles.backdrop} ridesState={{rides, setRides}} userState={{user, setUser}}></RideList>
+        <RideList style={styles.backdrop} dataState={{data, setData}} userState={{user, setUser}}></RideList>
       </View>
     </View>
   )
@@ -67,6 +73,7 @@ export default function Main() {
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="AddRideModal" component={AddRideModal} options={{ title: 'Add a New Ride' }} />
+        <Stack.Screen name="MyRides" component = {MyRides} options={{ title: "My Rides" }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

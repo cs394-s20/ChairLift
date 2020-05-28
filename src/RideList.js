@@ -12,11 +12,10 @@ import { Container, Header, Content, List, ListItem, Card } from 'native-base';
 //     },
 //   }));
 
-const RideList = ({ridesState, userState}) => {
-
+const RideList = ({dataState, userState}) => {
     var rides = [];
-    if (ridesState.rides) {
-        rides = Object.values(ridesState.rides);
+    if (dataState.data.rides) {
+        rides = Object.values(dataState.data.rides);
     }
 
     return (

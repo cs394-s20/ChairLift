@@ -29,9 +29,9 @@ function HomeScreen({ navigation }) {
 
   useEffect(() => {
     setUser(firebase.auth());
-    console.log(user);
-    console.log(firebase.auth);
-    // firebase.auth().onAuthStateChanged(user => {console.log("hello")});
+    console.log("user: ", user);
+    console.log("fb auth: ", firebase.auth);
+    firebase.auth().onAuthStateChanged(authUser => {console.log("pls NOW: ", authUser)});
   }, []);
 
   return (

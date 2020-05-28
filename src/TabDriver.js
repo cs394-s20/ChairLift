@@ -21,9 +21,7 @@ const TabDriver = ({dataState, userState}) => {
                 return (
                     rides.map((ride,index) => (
                     <ListItem key={index} style={styles.item}> 
-                    {console.log(ride)}
-                    {console.log(index)}
-                        <RequestedRide theRide={ride} userState={userState}></RequestedRide>
+                        <RequestedRide theRide={ride}></RequestedRide>
                     </ListItem>   ))
                 );
             }

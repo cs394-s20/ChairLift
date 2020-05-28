@@ -6,12 +6,8 @@ import db from './db.js';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
-const RequestedRide = ({ theRide, userState }) => {
-  console.log(theRide);
-  console.log(userState);
-  const driverID = userState.user.currentUser.uid;
+const RequestedRide = ({ theRide }) => {
   const ride = Object.values(theRide)[0];
-  console.log(ride);
     return (
       <View style={styles.container}>
         <CardItem header bordered style={styles.cardItems}>

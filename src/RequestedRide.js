@@ -6,8 +6,7 @@ import db from './db.js';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
-const RequestedRide = ({ theRide }) => {
-  const ride = Object.values(theRide)[0];
+const RequestedRide = (ride) => {
     return (
       <View style={styles.container}>
         <CardItem header bordered style={styles.cardItems}>

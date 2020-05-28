@@ -16,12 +16,14 @@ const TabDriver = ({dataState, userState}) => {
         if (dataState.data.users[driverID]) {
             if (dataState.data.users[driverID].driverRides) {
                 console.log(dataState.data.users[driverID].driverRides)
-                const rides = [dataState.data.users[driverID].driverRides];
-                console.log(rides);
+                const driverrides = dataState.data.users[driverID].driverRides;
+                console.log(driverrides);
+                var rides = Object.values(driverrides);
                 return (
                     rides.map((ride,index) => (
                     <ListItem key={index} style={styles.item}> 
-                        <RequestedRide theRide={ride}></RequestedRide>
+                    {console.log(ride)}
+                        <RequestedRide ride={ride}></RequestedRide>
                     </ListItem>   ))
                 );
             }

@@ -12,12 +12,19 @@ export default class SignUp extends React.Component {
         .auth()
         .createUserWithEmailAndPassword(this.state.email, this.state.password)
         .then((result) => {
+          const userID = result.user.uid;
+          var item = {
+            "name": this.state.fullName,
+            "email": this.state.email,
+            "phoneNum": this.state.phoneNum
+          };
+
+          firebase.database().ref("users/" + userID + "/profile").set(item);
           return result.user.updateProfile({
             displayName: this.state.fullName
           })
         })
-        .then(() => {
-          console.log("NAVIGATINGB ABY")
+        .then((result) => {
           this.props.navigation.navigate('Main')
         })
         .catch(error => this.setState({ errorMessage: error.message }))

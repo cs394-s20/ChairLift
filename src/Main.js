@@ -12,6 +12,12 @@ import 'react-native-gesture-handler';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
+// ****************************************
+// @ MARGOT + AMRO + AVA 
+// access user info via db like this! firebase.database().ref("users/" + userID + "/profile")
+// pass user state into your component and userID = userState.user.currentUser.uid
+// ****************************************
+
 function HomeScreen({ navigation }) {
 
   const [data, setData] = useState({});
@@ -30,12 +36,9 @@ function HomeScreen({ navigation }) {
 
   useEffect(() => {
     setUser(firebase.auth());
-    // console.log("here user:", user);
-    //console.log(firebase.auth);
     firebase.auth().onAuthStateChanged(authUser => {
         setUser(authUser);
-        console.log("just set to auth: ", authUser) 
-        console.log("this is user after update: ", user)});
+        });
   }, []);
   return (
     <View style={styles.main}>

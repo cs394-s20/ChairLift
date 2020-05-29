@@ -17,6 +17,7 @@ function HomeScreen({ navigation }) {
   const [data, setData] = useState({});
   const [addRideModalVisible, setAddRideModalVisible] = useState(false);
   const [user, setUser] = useState(null);
+
   useEffect(() => {
     const handleData = snap => {
       if (snap.val()) {
@@ -29,9 +30,12 @@ function HomeScreen({ navigation }) {
 
   useEffect(() => {
     setUser(firebase.auth());
-    //console.log(user);
+    // console.log("here user:", user);
     //console.log(firebase.auth);
-    // firebase.auth().onAuthStateChanged(user => {console.log("hello")});
+    firebase.auth().onAuthStateChanged(authUser => {
+        setUser(authUser);
+        console.log("just set to auth: ", authUser) 
+        console.log("this is user after update: ", user)});
   }, []);
   return (
     <View style={styles.main}>
@@ -52,9 +56,11 @@ function HomeScreen({ navigation }) {
         </Button>
         {/* <AddRideModal ridesState={{rides, setRides}} addRideModalVisibleState = {{ addRideModalVisible, setAddRideModalVisible}}/>  */}
       </Header>
+      <Button onPress={() => firebase.auth().signOut()}><Text>Sign Out</Text></Button>
       <View style={styles.container}>
         <RideList style={styles.backdrop} dataState={{data, setData}} userState={{user, setUser}}></RideList>
       </View>
+      
     </View>
   )
 }

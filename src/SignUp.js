@@ -4,14 +4,22 @@ import firebase from 'firebase/app';
 import db from './db.js';
 
 export default class SignUp extends React.Component {
-  state = { email: '', password: '', errorMessage: null }
+  state = { email: '', password: '', fullName: '', phoneNum: '', errorMessage: null }
   handleSignUp = () => {
     // TODO: Firebase stuff...
     console.log('handleSignUp')
     firebase
         .auth()
         .createUserWithEmailAndPassword(this.state.email, this.state.password)
-        .then(() => this.props.navigation.navigate('Main'))
+        .then((result) => {
+          return result.user.updateProfile({
+            displayName: this.state.fullName
+          })
+        })
+        .then(() => {
+          console.log("NAVIGATINGB ABY")
+          this.props.navigation.navigate('Main')
+        })
         .catch(error => this.setState({ errorMessage: error.message }))
   }
 render() {
@@ -22,6 +30,20 @@ render() {
           <Text style={{ color: 'red' }}>
             {this.state.errorMessage}
           </Text>}
+        <TextInput
+          placeholder="Full Name"
+          autoCapitalize="none"
+          style={styles.textInput}
+          onChangeText={fullName => this.setState({ fullName })}
+          value={this.state.fullName}
+        />
+        <TextInput
+          placeholder="Phone Number"
+          autoCapitalize="none"
+          style={styles.textInput}
+          onChangeText={phoneNum => this.setState({ phoneNum })}
+          value={this.state.phoneNum}
+        />
         <TextInput
           placeholder="Email"
           autoCapitalize="none"

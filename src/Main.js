@@ -4,66 +4,52 @@ import Ride from './Ride.js';
 import RideList from './RideList.js';
 import AddRideModal from './AddRideModal.js';
 import MyRides from './MyRides.js';
+import Profile from './Profile.js';
 import db from './db.js';
-import {Header, Title, Button, Icon} from 'native-base';
+import {Header, Title, Button, Icon, Container} from 'native-base';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import 'react-native-gesture-handler';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // ****************************************
 // @ MARGOT + AMRO + AVA 
 // access user info via db like this! firebase.database().ref("users/" + userID + "/profile")
-// pass user state into your component and userID = userState.user.currentUser.uid
+// pass user state into your component and userID = user.uid
 // ****************************************
 
-function HomeScreen({ navigation }) {
-
-  const [data, setData] = useState({});
-  const [addRideModalVisible, setAddRideModalVisible] = useState(false);
+function HomeScreen({ navigation, route }) {
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const handleData = snap => {
-      if (snap.val()) {
-        setData(snap.val());
-      } 
-    }
-    db.on('value', handleData, error => alert(error));
-    return () => { db.off('value', handleData); };
-  }, []);
+  const [data, setData] = useState({});
+
+    useEffect(() => {
+        const handleData = snap => {
+          if (snap.val()) {
+            setData(snap.val());
+          } 
+        }
+        db.on('value', handleData, error => alert(error));
+        return () => { db.off('value', handleData); };
+      }, []);
 
   useEffect(() => {
-    setUser(firebase.auth());
     firebase.auth().onAuthStateChanged(authUser => {
         setUser(authUser);
         });
   }, []);
+
   return (
     <View style={styles.main}>
       <Header style={styles.header}>
-        <Button onPress={() => navigation.navigate('MyRides', 
-          {
-            dataState: {data, setData},
-            userState: {user, setUser},
-          })}>
-          <Text>My Rides</Text>
-        </Button>
         <Title style={styles.title}>Chairlift</Title>
-        <Button style={styles.addRideModal} onPress={() => navigation.navigate('AddRideModal', 
-          {
-            userState: {user, setUser},
-          })}>
-          <Text><Icon type="FontAwesome" name="plus" /><Icon type="FontAwesome" name="car" /></Text>
-        </Button>
-        {/* <AddRideModal ridesState={{rides, setRides}} addRideModalVisibleState = {{ addRideModalVisible, setAddRideModalVisible}}/>  */}
       </Header>
       <Button onPress={() => firebase.auth().signOut()}><Text>Sign Out</Text></Button>
       <View style={styles.container}>
-        <RideList style={styles.backdrop} dataState={{data, setData}} userState={{user, setUser}}></RideList>
+        <RideList style={styles.backdrop} dataState={{data, setData}}></RideList>
       </View>
-      
     </View>
   )
 }
@@ -75,16 +61,24 @@ function AddRide() {
 }
 
 export default function Main() {
+  const [test, setTest] = useState("hello");
+  
+
   const Stack = createStackNavigator();
+  const Tab = createBottomTabNavigator();
   
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="AddRideModal" component={AddRideModal} options={{ title: 'Add a New Ride' }} />
-        <Stack.Screen name="MyRides" component = {MyRides} options={{ title: "My Rides" }}/>
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Container>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen name="Home" component={HomeScreen} />
+          <Tab.Screen name="AddRideModal" component={AddRideModal} options={{ title: 'Add a New Ride' }}/>
+          <Tab.Screen name="My Rides" component={MyRides}/>
+          <Tab.Screen name="Profile" component={Profile} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </Container>
+
   );
 }
 

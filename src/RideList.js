@@ -12,7 +12,7 @@ import { Container, Header, Content, List, ListItem, Card } from 'native-base';
 //     },
 //   }));
 
-const RideList = ({dataState, userState}) => {
+const RideList = ({dataState}) => {
     var rides = [];
     if (dataState.data.rides) {
         rides = Object.values(dataState.data.rides);
@@ -25,7 +25,7 @@ const RideList = ({dataState, userState}) => {
           {
           rides.map((ride,index) => (
               <ListItem key={index} style={styles.item}> 
-                <Ride ride={ride} userState={userState}></Ride>
+                <Ride ride={ride}></Ride>
               </ListItem>   )
           ) 
           }   

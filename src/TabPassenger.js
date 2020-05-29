@@ -8,7 +8,17 @@ import 'firebase/database';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-const TabPassenger = ({userState}) => {
+const TabPassenger = () => {
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        firebase.auth().onAuthStateChanged(authUser => {
+            setUser(authUser);
+            });
+    }, []);
+
+    //user_id = user.uid
+
     return (
         <Container>
             <Text>passenger tab</Text>

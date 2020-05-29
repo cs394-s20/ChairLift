@@ -9,29 +9,45 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import RequestedRide from './RequestedRide.js'
 
-const TabDriver = ({dataState, userState}) => {
-    const checkRides = () => {
-        const driverID = userState.user.currentUser.uid;
-        console.log("dataState: ", dataState);
-        if (dataState.data.users[driverID]) {
-            if (dataState.data.users[driverID].driverRides) {
-                console.log(dataState.data.users[driverID].driverRides)
-                const driverrides = dataState.data.users[driverID].driverRides;
-                console.log(driverrides);
-                var rides = Object.values(driverrides);
-                return (
-                    rides.map((ride,index) => (
-                    <ListItem key={index} style={styles.item}> 
-                    {console.log(ride)}
-                        <RequestedRide ride={ride}></RequestedRide>
-                    </ListItem>   ))
-                );
-            }
+const TabDriver = ({dataState}) => {
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        firebase.auth().onAuthStateChanged(authUser => {
+            setUser(authUser);
+            });
+    }, []);
+
+
+    checkRides = () => {
+        if (user == null) {
+            return <Text>Loading Rides...</Text>
         }
         else {
-            console.log("no rides");
-            return (<ListItem><Text>No listed rides</Text></ListItem>);
+            const driverID = user.uid;
+            console.log("dataState: ", dataState);
+            if (dataState.data.users[driverID]) {
+                if (dataState.data.users[driverID].driverRides) {
+                    console.log(dataState.data.users[driverID].driverRides)
+                    const driverrides = dataState.data.users[driverID].driverRides;
+                    console.log(driverrides);
+                    var rides = Object.values(driverrides);
+                    return (
+                        rides.map((ride,index) => (
+                        <ListItem key={index} style={styles.item}> 
+                        {console.log(ride)}
+                            <RequestedRide ride={ride}></RequestedRide>
+                        </ListItem>   ))
+                    );
+                }
+            }
+            else {
+                console.log("no rides");
+                return (<ListItem><Text>No listed rides</Text></ListItem>);
+            }
+
         }
+
     }
     return (
         <Container style={styles.container}>

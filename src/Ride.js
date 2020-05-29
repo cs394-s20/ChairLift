@@ -8,14 +8,20 @@ import 'firebase/database';
 
 const Ride = (rideObj) => {
     const [modalVisible, setModalVisible] = useState(false);
-    const userState = rideObj.userState;
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+      firebase.auth().onAuthStateChanged(authUser => {
+          setUser(authUser);
+          });
+    }, []);
 
 
     const updateJSON = () => {
             
       var item = rideObj.ride;
 
-      const userID = userState.user.currentUser.uid ;
+      const userID = user.uid ;
 
       if(!("requested" in item)){
         var newRequest = {[userID]: "pending"};

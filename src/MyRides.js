@@ -11,19 +11,30 @@ import { createStackNavigator } from '@react-navigation/stack';
 import TabDriver from './TabDriver';
 import TabPassenger from './TabPassenger';
 
-const MyRides = ({route, navigation}) => {
-    const { dataState } = route.params;
-    const { userState } = route.params;
+const MyRides = ({route, navigation, initialState}) => {
     const [driverRides, setDriverRides] = useState(null);
+    
+    const [data, setData] = useState({});
+
+    useEffect(() => {
+        const handleData = snap => {
+          if (snap.val()) {
+            setData(snap.val());
+          } 
+        }
+        db.on('value', handleData, error => alert(error));
+        return () => { db.off('value', handleData); };
+      }, []);
+
     return (
         <Container>
             <Content>
                 <Tabs>
                     <Tab heading = "TabDriver">
-                        <TabDriver dataState={dataState} userState={userState} />
+                        <TabDriver dataState={{data, setData}}/>
                     </Tab>
                     <Tab heading = "TabPassenger">
-                        <TabPassenger rides={{driverRides, setDriverRides}} userObj={userState}/>
+                        <TabPassenger rides={{driverRides, setDriverRides}}/>
                     </Tab>
                 </Tabs>
             </Content>

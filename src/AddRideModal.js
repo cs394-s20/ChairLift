@@ -9,9 +9,15 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 const AddRideModal = ({ route, navigation }) => {
 
-  const { userState } = route.params;
+  const [user, setUser] = useState(null);
 
-  const updateJSON = (userState) => {
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(authUser => {
+        setUser(authUser);
+        });
+  }, []);
+
+  const updateJSON = (user) => {
     var newItemKey = db.push().key;
     var item = {
       "rideID": newItemKey,
@@ -25,7 +31,7 @@ const AddRideModal = ({ route, navigation }) => {
       "returnTime": JSON.stringify(returnTime).substring(12,17),
       "seatsLeft": seatsLeft,
       "startLoc": departLoc,
-      "driverID": userState.user.currentUser.uid
+      "driverID": user.uid
       
     };
 
@@ -209,7 +215,7 @@ const AddRideModal = ({ route, navigation }) => {
               <Item>
                 <Input placeholder='Number of Available Seats' onChangeText={(num) => {setSeatsLeft(num)}}/>
               </Item>
-              <Button style={styles.centeredView} onPress = { () => updateJSON(userState)}>
+              <Button style={styles.centeredView} onPress = { () => updateJSON(user)}>
                 <Text style={styles.text} >Add Ride</Text>
               </Button>
               

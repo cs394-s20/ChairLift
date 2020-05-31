@@ -22,7 +22,7 @@ const TabDriver = ({dataState}) => {
     console.log("tempData", tempData);
 
 
-    checkRides = () => {
+    const checkRides = () => {
         if (user == null) {
             return <Text>Loading Rides...</Text>
         }
@@ -32,11 +32,10 @@ const TabDriver = ({dataState}) => {
                 if (dataState.data.users[driverID].driverRides) {
                     const driverrides = dataState.data.users[driverID].driverRides;
                     var rides = Object.values(driverrides);
-                    console.log("tempData checkRides", tempData);
                     return (
                         rides.map((ride,index) => (
                         <ListItem key={index} style={styles.item}> 
-                            <MyRide ride={ride}></MyRide>
+                            <MyRide ride={ride} dataState={dataState}></MyRide>
                         </ListItem>   ))
                     );
                 }

@@ -38,7 +38,7 @@ const Ride = (rideObj) => {
       const driver = item.driverID;      
       firebase.database().ref("users/" + driver + "/driverRides/" + item.rideID).set(item);
       // adding to passenger rides in firebase???
-      //firebase.database().ref("users/" + userID + "/passengerRides/" + item.rideID).set(item);
+      firebase.database().ref("users/" + userID + "/passengerRides/" + item.rideID).set(item);
 
     };
 

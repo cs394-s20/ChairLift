@@ -16,12 +16,15 @@ const Ride = (rideObj) => {
           });
     }, []);
 
-
+    
     const updateJSON = () => {
-            
+        
+      //var newSeats = rideObj.ride.seatsLeft - 1;
+      rideObj.ride.seatsLeft--;
       var item = rideObj.ride;
+      firebase.database().ref("rides/" + rideObj.ride.rideID).set(item);
 
-      const userID = user.uid ;
+      const userID = user.uid;
 
       if(!("requested" in item)){
         var newRequest = {[userID]: "pending"};

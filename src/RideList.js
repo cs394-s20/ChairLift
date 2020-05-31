@@ -12,10 +12,17 @@ import { Container, Header, Content, List, ListItem, Card } from 'native-base';
 //     },
 //   }));
 
+
+
 const RideList = ({dataState}) => {
     var rides = [];
     if (dataState.data.rides) {
-        rides = Object.values(dataState.data.rides);
+        var temp = Object.values(dataState.data.rides);
+        for (var i=0; i<temp.length; i++){
+          if (temp[i].seatsLeft > 0){
+            rides.push(temp[i]);
+          }
+        }
     }
 
     return (

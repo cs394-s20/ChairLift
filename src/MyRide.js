@@ -6,7 +6,29 @@ import db from './db.js';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
-const RequestedRide = (ride) => {
+const MyRide = (ride) => {
+
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+      const handleData = snap => {
+        if (snap.val()) {
+          setData(snap.val());
+        } 
+      }
+      db.on('value', handleData, error => alert(error));
+      return () => { db.off('value', handleData); };
+    }, []);;
+
+    var passengers = Object.keys(ride.ride.requested).map(function(key) {
+      return [String(key), ride.ride.requested[key]];
+    });
+
+    console.log("data", data);
+    console.log("data users", data.users);
+    //console.log("data", data);
+    
+
     return (
       <View style={styles.container}>
         <CardItem header bordered style={styles.cardItems}>
@@ -15,30 +37,25 @@ const RequestedRide = (ride) => {
               {/* have to change the name to passenger's name */}
             Passenger Name
           </Text> 
-          <Text> (0.5 mi away) <Icon style={styles.arrow} type="FontAwesome" name="arrow-right" /> {ride.endLoc}</Text> 
-          </Body>
-          <Body>
-          <Button style={styles.request} onPress={() => updateJSON()}>
-                <Text style={styles.requestText}>Confirm</Text>
-          </Button>
+          <Text> (0.5 mi away) <Icon style={styles.arrow} type="FontAwesome" name="arrow-right" /> {ride.ride.endLoc}</Text> 
           </Body>
           
         </CardItem>
         <CardItem style={styles.cardItems}>
           <Body>
             <Text>
-              Departure: {ride.departTime}, {ride.departDate}
+              Departure: {ride.ride.departTime}, {ride.ride.departDate}
             </Text>
           </Body>
           <Body>
             <Text>
-              Return: {ride.departTime}, {ride.departDate}
+              Return: {ride.ride.departTime}, {ride.ride.departDate}
             </Text>
           </Body>
         </CardItem>
         <CardItem style={styles.cardItems}>
           <Body>
-            <Text>Seats Remaining: {ride.seatsLeft} </Text>
+            <Text>Seats Remaining: {ride.ride.seatsLeft} </Text>
           </Body>
           
           <TouchableOpacity style={styles.moreInfoBtn} onPress={() => {setModalVisible(true)}}>
@@ -47,8 +64,22 @@ const RequestedRide = (ride) => {
         </CardItem>
         <CardItem style={styles.cardItems}>
             <Body>
-                <Text>Note: {ride.desc}</Text>
+                <Text>Note: {ride.ride.desc}</Text>
             </Body>
+        </CardItem>
+        <CardItem>
+          <Text>Passengers: </Text>
+          {
+            passengers.map( passenger => (
+              <Body>
+                <Text>
+                  {data.users[passenger[0]].profile.name}
+                  {data.users[passenger[0]].profile.phoneNum}
+                </Text>
+              </Body>
+              
+            ))
+          }
         </CardItem>
       </View>
         
@@ -98,4 +129,4 @@ const styles = StyleSheet.create({
 
 
 
-export default RequestedRide;
+export default MyRide;

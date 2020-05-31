@@ -16,12 +16,15 @@ const Ride = (rideObj) => {
           });
     }, []);
 
-
+    
     const updateJSON = () => {
-            
+        
+      //var newSeats = rideObj.ride.seatsLeft - 1;
+      rideObj.ride.seatsLeft--;
       var item = rideObj.ride;
+      firebase.database().ref("rides/" + rideObj.ride.rideID).set(item);
 
-      const userID = user.uid ;
+      const userID = user.uid;
 
       if(!("requested" in item)){
         var newRequest = {[userID]: "pending"};
@@ -35,7 +38,7 @@ const Ride = (rideObj) => {
       const driver = item.driverID;      
       firebase.database().ref("users/" + driver + "/driverRides/" + item.rideID).set(item);
       // adding to passenger rides in firebase???
-      //firebase.database().ref("users/" + userID + "/passengerRides/" + item.rideID).set(item);
+      firebase.database().ref("users/" + userID + "/passengerRides/" + item.rideID).set(item);
 
     };
 

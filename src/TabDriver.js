@@ -7,7 +7,7 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import RequestedRide from './RequestedRide.js'
+import MyRide from './MyRide.js'
 
 const TabDriver = ({dataState}) => {
     const [user, setUser] = useState(null);
@@ -18,31 +18,29 @@ const TabDriver = ({dataState}) => {
             });
     }, []);
 
+    const tempData = dataState.data;
+    console.log("tempData", tempData);
 
-    checkRides = () => {
+
+    const checkRides = () => {
         if (user == null) {
             return <Text>Loading Rides...</Text>
         }
         else {
             const driverID = user.uid;
-            console.log("dataState: ", dataState);
             if (dataState.data.users[driverID]) {
                 if (dataState.data.users[driverID].driverRides) {
-                    console.log(dataState.data.users[driverID].driverRides)
                     const driverrides = dataState.data.users[driverID].driverRides;
-                    console.log(driverrides);
                     var rides = Object.values(driverrides);
                     return (
                         rides.map((ride,index) => (
                         <ListItem key={index} style={styles.item}> 
-                        {console.log(ride)}
-                            <RequestedRide ride={ride}></RequestedRide>
+                            <MyRide ride={ride} dataState={dataState}></MyRide>
                         </ListItem>   ))
                     );
                 }
             }
             else {
-                console.log("no rides");
                 return (<ListItem><Text>No listed rides</Text></ListItem>);
             }
 

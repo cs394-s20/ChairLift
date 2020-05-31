@@ -39,6 +39,8 @@ const AddRideModal = ({ route, navigation }) => {
     firebase.database().ref("rides/" + newItemKey).set(item);
 
     //push to users driverRides
+    console.log("user", user);
+    firebase.database().ref("users/" + user.uid + "/driverRides/" + newItemKey).set(item);  
 
     navigation.navigate('Home');
     return;

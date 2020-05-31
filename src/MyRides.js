@@ -12,8 +12,6 @@ import TabDriver from './TabDriver';
 import TabPassenger from './TabPassenger';
 
 const MyRides = ({route, navigation, initialState}) => {
-    const [driverRides, setDriverRides] = useState(null);
-    
     const [data, setData] = useState({});
 
     useEffect(() => {
@@ -24,7 +22,7 @@ const MyRides = ({route, navigation, initialState}) => {
         }
         db.on('value', handleData, error => alert(error));
         return () => { db.off('value', handleData); };
-      }, []);
+      }, []);;
 
     return (
         <Container>
@@ -34,7 +32,7 @@ const MyRides = ({route, navigation, initialState}) => {
                         <TabDriver dataState={{data, setData}}/>
                     </Tab>
                     <Tab heading = "TabPassenger">
-                        <TabPassenger rides={{driverRides, setDriverRides}}/>
+                        <TabPassenger dataState={{data, setData}}/>
                     </Tab>
                 </Tabs>
             </Content>

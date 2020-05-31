@@ -7,8 +7,9 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import MyRide from './MyRide.js'
 
-const TabPassenger = () => {
+const TabPassenger = ({dataState}) => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -17,14 +18,55 @@ const TabPassenger = () => {
             });
     }, []);
 
-    //user_id = user.uid
 
+    const checkRides = () => {
+        if (user == null) {
+            return <Text>Loading Rides...</Text>
+        }
+        else {
+            const driverID = user.uid;
+            if (dataState.data.users[driverID]) {
+                if (dataState.data.users[driverID].passengerRides) {
+                    const driverrides = dataState.data.users[driverID].passengerRides;
+                    var rides = Object.values(driverrides);
+                    return (
+                        rides.map((ride,index) => (
+                        <ListItem key={index} style={styles.item}> 
+                            <MyRide ride={ride} dataState={dataState}></MyRide>
+                        </ListItem>   ))
+                    );
+                }
+            }
+            else {
+                return (<ListItem><Text>No listed rides</Text></ListItem>);
+            }
+
+        }
+
+    }
     return (
-        <Container>
-            <Text>passenger tab</Text>
-        </Container>
+        <Container style={styles.container}>
+            <Content>
+            <List>
+                {checkRides()}   
+            </List>
+            </Content>
+      </Container>
         
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+      backgroundColor: "#b2b9bf"
+  
+    },
+    item: {
+      borderBottomWidth: 0,
+      paddingBottom: 2,
+      backgroundColor: "transparent"
+    }
+  });
+
 
 export default TabPassenger;

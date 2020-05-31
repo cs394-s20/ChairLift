@@ -7,16 +7,18 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 
 const MyRide = ({ride, dataState}) => {
-    var passengers = Object.keys(ride.requested).map(function(key) {
-      return [String(key), ride.requested[key]];
-    });
+    var passengers = []
+    if(ride.requested){
+      passengers = Object.keys(ride.requested).map(function(key) {
+        return [String(key), ride.requested[key]];
+      });}
     const data = dataState.data
-    console.log("data", dataState.data);
-    //console.log("data", data);
-    
+    const [modalVisible, setModalVisible] = useState(false);
+    const model_ride = {'ride': ride}
 
     return (
       <View style={styles.container}>
+        <RideModal modalVisibleState = { { modalVisible, setModalVisible } } rideObj = {model_ride}></RideModal>
         <CardItem header bordered style={styles.cardItems}>
           <Body>
           <Text style={styles.title}>

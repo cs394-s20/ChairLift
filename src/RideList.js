@@ -12,14 +12,22 @@ import { Container, Header, Content, List, ListItem, Card } from 'native-base';
 //     },
 //   }));
 
-
+const getCurrentDate = () => {
+  var date = new Date().getDate();
+  var month = new Date().getMonth();
+  var year = new Date().getFullYear();
+  return new Date(year, month, date);
+}
 
 const RideList = ({dataState}) => {
     var rides = [];
     if (dataState.data.rides) {
         var temp = Object.values(dataState.data.rides);
         for (var i=0; i<temp.length; i++){
-          if (temp[i].seatsLeft > 0){
+          var departDateString = temp[i].departDate
+          var departDate = new Date(departDateString)
+          console.log(getCurrentDate() > departDate)
+          if (temp[i].seatsLeft > 0 && getCurrentDate() < departDate){
             rides.push(temp[i]);
           }
         }

@@ -19,8 +19,6 @@ const TabDriver = ({dataState}) => {
     }, []);
 
     const tempData = dataState.data;
-    console.log("tempData", tempData);
-
 
     const checkRides = () => {
         if (user == null) {

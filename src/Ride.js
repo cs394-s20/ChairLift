@@ -15,7 +15,6 @@ const Ride = (rideObj) => {
           setUser(authUser);
           });
     }, []);
-
     
     const updateJSON = () => {
         

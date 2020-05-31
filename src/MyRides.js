@@ -28,10 +28,10 @@ const MyRides = ({route, navigation, initialState}) => {
         <Container>
             <Content>
                 <Tabs>
-                    <Tab heading = "TabDriver">
+                    <Tab heading = "Driver">
                         <TabDriver dataState={{data, setData}}/>
                     </Tab>
-                    <Tab heading = "TabPassenger">
+                    <Tab heading = "Passenger">
                         <TabPassenger dataState={{data, setData}}/>
                     </Tab>
                 </Tabs>

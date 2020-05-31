@@ -20,12 +20,16 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // pass user state into your component and userID = user.uid
 // ****************************************
 
+
+
+
 function HomeScreen({ navigation, route }) {
+
   const [user, setUser] = useState(null);
 
   const [data, setData] = useState({});
 
-    useEffect(() => {
+  useEffect(() => {
         const handleData = snap => {
           if (snap.val()) {
             setData(snap.val());
@@ -41,6 +45,7 @@ function HomeScreen({ navigation, route }) {
         });
   }, []);
 
+  
   return (
     <View style={styles.main}>
       <Header style={styles.header}>
@@ -54,11 +59,12 @@ function HomeScreen({ navigation, route }) {
   )
 }
 
-function AddRide() {
-  return (
-  <Text>Add a ride Here</Text>
-  )
-}
+// function AddRideModalScreen() {
+//   return (
+//   <AddRideModal userState={{user, setUser}}>
+//   </AddRideModal>
+//   )
+// }
 
 export default function Main() {
   const [test, setTest] = useState("hello");

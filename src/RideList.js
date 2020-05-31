@@ -26,7 +26,6 @@ const RideList = ({dataState}) => {
         for (var i=0; i<temp.length; i++){
           var departDateString = temp[i].departDate
           var departDate = new Date(departDateString)
-          console.log(getCurrentDate() > departDate)
           if (temp[i].seatsLeft > 0 && getCurrentDate() < departDate){
             rides.push(temp[i]);
           }

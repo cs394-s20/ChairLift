@@ -9,6 +9,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 const AddRideModal = ({ route, navigation }) => {
 
+
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -17,16 +18,33 @@ const AddRideModal = ({ route, navigation }) => {
         });
   }, []);
 
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+        const handleData = snap => {
+          if (snap.val()) {
+            setData(snap.val());
+          } 
+        }
+        db.on('value', handleData, error => alert(error));
+        return () => { db.off('value', handleData); };
+      }, []);
+
+  
+
   const updateJSON = (user) => {
     var newItemKey = db.push().key;
+    const userID = user.uid;
+    
+
     var item = {
       "rideID": newItemKey,
       "departDate": JSON.stringify(departDate).substring(1,11),
       "departTime": JSON.stringify(departTime).substring(12,17), 
       "desc": desc,
       "endLoc": resort,
-      "name": name,
-      "phoneNum": phoneNum,
+      "name": user.displayName,
+      "phoneNum": data.users[userID].profile.phoneNum,
       "returnDate": JSON.stringify(returnDate).substring(1,11),
       "returnTime": JSON.stringify(returnTime).substring(12,17),
       "seatsLeft": seatsLeft,
@@ -39,7 +57,6 @@ const AddRideModal = ({ route, navigation }) => {
     firebase.database().ref("rides/" + newItemKey).set(item);
 
     //push to users driverRides
-    console.log("user", user);
     firebase.database().ref("users/" + user.uid + "/driverRides/" + newItemKey).set(item);  
 
     navigation.navigate('Home');
@@ -60,12 +77,12 @@ const AddRideModal = ({ route, navigation }) => {
       return new Date(year, month, date);
     }
 
+    //console.log("log user", user);
+
     var maxDate = getMaxDate();
     var currDate = getCurrentDate();
     const [departDate, setDepartDate] = useState(currDate);
     const [returnDate, setReturnDate] = useState(currDate);
-    const [name, setName] = useState("");
-    const [phoneNum, setPhoneNum] = useState("");
     const [departLoc, setDepartLoc] = useState("");
     const [departTime, setDepartTime] = useState(currDate);
     const [resort, setResort] = useState("");
@@ -119,12 +136,6 @@ const AddRideModal = ({ route, navigation }) => {
     return (
       <Container>
         <Content>
-              <Item>
-                <Input placeholder='Name' onChangeText={(name) => {setName(name)}}/>
-              </Item>
-              <Item>
-                <Input placeholder='Phone Number' onChangeText={(num) => {setPhoneNum(num)}}/>
-              </Item>
               <Item>
                 <Input placeholder='Departure Location' onChangeText={(loc) => {setDepartLoc(loc)}}/>
               </Item>

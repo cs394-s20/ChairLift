@@ -31,6 +31,7 @@ const Profile = () => {
             <Container style={styles.container}>
                 <View>
                     <Text>This is your profile page</Text>
+                    <Button light onPress={() => firebase.auth().signOut()}><Text>Sign Out</Text></Button>
                 </View>
             </Container>
         )

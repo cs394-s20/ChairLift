@@ -51,7 +51,6 @@ function HomeScreen({ navigation, route }) {
       <Header style={styles.header}>
         <Title style={styles.title}>Chairlift</Title>
       </Header>
-      <Button onPress={() => firebase.auth().signOut()}><Text>Sign Out</Text></Button>
       <View style={styles.container}>
         <RideList style={styles.backdrop} dataState={{data, setData}}></RideList>
       </View>

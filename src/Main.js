@@ -6,7 +6,7 @@ import AddRideModal from './AddRideModal.js';
 import MyRides from './MyRides.js';
 import Profile from './Profile.js';
 import db from './db.js';
-import {Header, Title, Button, Icon, Container} from 'native-base';
+import {Header, Title, Button, Icon, Container, Picker} from 'native-base';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import 'react-native-gesture-handler';
@@ -35,7 +35,7 @@ export default function Main() {
         db.on('value', handleData, error => alert(error));
         return () => { db.off('value', handleData); };
       }, []);
-
+  
   useEffect(() => {
     firebase.auth().onAuthStateChanged(authUser => {
         setUser(authUser);

@@ -58,8 +58,6 @@ const AddRideModal = ({ userState, dataState }) => {
       return new Date(year, month, date);
     }
 
-    //console.log("log user", user);
-
     var maxDate = getMaxDate();
     var currDate = getCurrentDate();
     const [departDate, setDepartDate] = useState(currDate);
@@ -79,7 +77,6 @@ const AddRideModal = ({ userState, dataState }) => {
 
     const onChangeResort = (selectedResort) => {
       setResort(selectedResort);
-      console.log(selectedResort);
     };
 
 
@@ -92,7 +89,6 @@ const AddRideModal = ({ userState, dataState }) => {
     };
 
     const onChangeDeptTime = (event, selectedTime) => {
-      console.log('dept time', selectedTime);
       setDepartTime(selectedTime);
     };
 

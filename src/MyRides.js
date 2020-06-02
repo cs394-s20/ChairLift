@@ -11,18 +11,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import TabDriver from './TabDriver';
 import TabPassenger from './TabPassenger';
 
-const MyRides = ({route, navigation, initialState}) => {
-    const [data, setData] = useState({});
-
-    useEffect(() => {
-        const handleData = snap => {
-          if (snap.val()) {
-            setData(snap.val());
-          } 
-        }
-        db.on('value', handleData, error => alert(error));
-        return () => { db.off('value', handleData); };
-      }, []);;
+const MyRides = ({dataState}) => {
+    const [data, setData] = [dataState.data, dataState.setData];
 
     return (
         <Container>

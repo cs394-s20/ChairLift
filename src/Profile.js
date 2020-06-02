@@ -14,15 +14,10 @@ import 'firebase/auth';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
-const Profile = () => {
-    const [user, setUser] = useState(null);
+const Profile = ({userState}) => {
+    const [user, setUser] = [userState.user, userState.setUser];
     let userID = null;
     let profileItem = null;
-    useEffect(() => {
-        firebase.auth().onAuthStateChanged(authUser => {
-            setUser(authUser);
-            });
-    }, []);
 
     if (user != null) {
         userID = firebase.auth().uid;

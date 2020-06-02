@@ -21,10 +21,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // ****************************************
 
 
-
-
-function HomeScreen({ navigation, route }) {
-
+export default function Main() {
   const [user, setUser] = useState(null);
 
   const [data, setData] = useState({});
@@ -45,7 +42,7 @@ function HomeScreen({ navigation, route }) {
         });
   }, []);
 
-  
+function HomeScreen({ navigation, route }) {
   return (
     <View style={styles.main}>
       <Header style={styles.header}>
@@ -58,15 +55,27 @@ function HomeScreen({ navigation, route }) {
   )
 }
 
-// function AddRideModalScreen() {
-//   return (
-//   <AddRideModal userState={{user, setUser}}>
-//   </AddRideModal>
-//   )
-// }
+function AddRideModalScreen({navigation, route}) {
+  return (
+  <AddRideModal userState={{user, setUser}} dataState={{data, setData}}>
+  </AddRideModal>
+  )
+}
 
-export default function Main() {
-  const [test, setTest] = useState("hello");
+function MyRidesScreen({navigation, route}) {
+  return (
+  <MyRides dataState={{data, setData}}>
+  </MyRides>
+  )
+}
+
+function ProfileScreen({navigation, route}) {
+  return (
+  <Profile userState={{user, setUser}}>
+  </Profile>
+  )
+}
+
   
 
   const Stack = createStackNavigator();
@@ -77,9 +86,9 @@ export default function Main() {
       <NavigationContainer>
         <Tab.Navigator>
           <Tab.Screen name="Home" component={HomeScreen} />
-          <Tab.Screen name="AddRideModal" component={AddRideModal} options={{ title: 'Add a New Ride' }}/>
-          <Tab.Screen name="My Rides" component={MyRides}/>
-          <Tab.Screen name="Profile" component={Profile} />
+          <Tab.Screen name="AddRideModal" component={AddRideModalScreen} options={{ title: 'Add a New Ride' }}/>
+          <Tab.Screen name="My Rides" component={MyRidesScreen}/>
+          <Tab.Screen name="Profile" component={ProfileScreen} />
         </Tab.Navigator>
       </NavigationContainer>
     </Container>

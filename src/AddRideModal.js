@@ -1,37 +1,18 @@
 import React, { Component, useState, useEffect} from 'react';
 import { Alert, Modal, StyleSheet, Text, TouchableHighlight, View } from "react-native";
-import { Container, Header, Content, List, ListItem, Card, CardItem, Icon, Body, Item, Input, Button } from 'native-base';
+import { Container, Header, Content, List, ListItem, Card, CardItem, Icon, Body, Item, Input, Button, Picker } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import db from './db.js';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-const AddRideModal = ({ route, navigation }) => {
+const AddRideModal = ({ userState, dataState }) => {
+  const [user, setUser] = [userState.user, userState.setUser];
+  const [data, setData] = [dataState.data, dataState.setData];
 
-
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged(authUser => {
-        setUser(authUser);
-        });
-  }, []);
-
-  const [data, setData] = useState({});
-
-  useEffect(() => {
-        const handleData = snap => {
-          if (snap.val()) {
-            setData(snap.val());
-          } 
-        }
-        db.on('value', handleData, error => alert(error));
-        return () => { db.off('value', handleData); };
-      }, []);
-
+  resortList = Object.values(data["resorts"]);
   
-
   const updateJSON = (user) => {
     var newItemKey = db.push().key;
     const userID = user.uid;
@@ -94,6 +75,12 @@ const AddRideModal = ({ route, navigation }) => {
     const [showReturnDate, setShowReturnDate] = useState(false);
     const [showDeptTime, setShowDeptTime] = useState(false);
     const [showReturnTime, setShowReturnTime] = useState(false);
+
+
+    const onChangeResort = (selectedResort) => {
+      setResort(selectedResort);
+      console.log(selectedResort);
+    };
 
 
     const onChangeDeptDate = (event, selectedDate) => {
@@ -180,9 +167,19 @@ const AddRideModal = ({ route, navigation }) => {
                 <Input placeholder='Departure Time' onChangeText={(departTime) => {setDepartTime(departTime)}}/>
               </Item>*/}
 
-              <Item>
-                <Input placeholder='Resort' onChangeText={(resort) => {setResort(resort)}}/>
+              <Item picker>
+                <Picker mode="dropdown"
+                iosIcon={<Icon name="arrow-down" />} placeholder="Select your resort"
+                placeholderStyle={{ color: "#bfc6ea" }}
+                placeholderIconColor="#007aff"
+                selectedValue={resort}
+                onValueChange={onChangeResort}
+                
+                >
+                  {resortList.map(resort => (<Picker.Item label={resort} value={resort}/>))}
+                </Picker>
               </Item>
+              
 
               <View>
                 <View style = {styles.pickerView}>

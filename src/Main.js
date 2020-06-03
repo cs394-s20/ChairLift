@@ -84,9 +84,39 @@ function ProfileScreen({navigation, route}) {
   return (
     <Container>
       <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen name="Home" component={HomeScreen} />
-          <Tab.Screen name="AddRideModal" component={AddRideModalScreen} options={{ title: 'Add a New Ride' }}/>
+        <Tab.Navigator
+          screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+
+            if (route.name === 'Home') {
+              iconName = focused
+                ? 'home'
+                : 'home'; //can be changed to react to clicks
+            } 
+              else if (route.name === 'AddRideModal') {
+                iconName = focused ? 'plus' : 'plus';
+              }
+
+              else if (route.name === 'My Rides') {
+                iconName = focused ? 'car' : 'car';
+              }
+            
+              else if (route.name === 'Profile') {
+              iconName = focused ? 'user' : 'user';
+            }
+
+            
+
+
+            // You can return any component that you like here!
+            return <Icon type="FontAwesome" name={iconName} /> ;
+          },
+        })}
+      >
+          <Tab.Screen name="Home" component={HomeScreen}/>
+
+          <Tab.Screen name="AddRideModal" component={AddRideModalScreen} options={{ title: 'Create Ride' }}/>
           <Tab.Screen name="My Rides" component={MyRidesScreen}/>
           <Tab.Screen name="Profile" component={ProfileScreen} />
         </Tab.Navigator>

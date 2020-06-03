@@ -19,6 +19,33 @@ const getCurrentDate = () => {
   return new Date(year, month, date);
 }
 
+const Rides = ({rides, resortFilter}) => {
+
+  if (rides.filter(ride => resortFilter == "all" ? true : ride.endLoc == resortFilter).length == 0)
+    return (
+      <Content>
+        <Text style={styles.noRides}> No rides found </Text>
+      </Content>
+    )
+  else 
+    return (
+      <Content>
+          <List>
+          {
+          rides.filter(ride => resortFilter == "all" ? true : ride.endLoc == resortFilter)
+              .map((ride,index) => (
+              <ListItem key={index} style={styles.item}> 
+                <Ride ride={ride}></Ride>
+              </ListItem>   )
+          ) 
+          }   
+          </List>
+        </Content>
+
+    )
+
+}
+
 const RideList = ({dataState}) => {
     const [resortFilter, setResortFilter] = useState("all");
     var resortList = [];
@@ -51,18 +78,7 @@ const RideList = ({dataState}) => {
             <Picker.Item label="All Resorts" value="all"/>
             {resortList.map(resort => (<Picker.Item label={resort} value={resort}/>))}
         </Picker>
-        <Content>
-          <List>
-          {
-          rides.filter(ride => resortFilter == "all" ? true : ride.endLoc == resortFilter)
-              .map((ride,index) => (
-              <ListItem key={index} style={styles.item}> 
-                <Ride ride={ride}></Ride>
-              </ListItem>   )
-          ) 
-          }   
-          </List>
-        </Content>
+        <Rides rides={rides} resortFilter={resortFilter}/>
       </Container>
     )
 
@@ -70,14 +86,19 @@ const RideList = ({dataState}) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#b2b9bf"
+    backgroundColor: "#b2b9bf",
+    width: "100%"
 
   },
   item: {
     borderBottomWidth: 0,
     paddingBottom: 2,
     backgroundColor: "transparent"
+  },
+  noRides: {
+    marginLeft: 13
   }
+
 });
 
 export default RideList; 

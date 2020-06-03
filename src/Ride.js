@@ -76,7 +76,7 @@ const Ride = (rideObj) => {
           </Body>
           
           <TouchableOpacity style={styles.moreInfoBtn} onPress={() => {setModalVisible(true)}}>
-              <Text><Icon style={styles.plus} type="FontAwesome" name="plus" /></Text>
+              <Text><Icon style={styles.plus} type="FontAwesome" name="info-circle" /></Text>
           </TouchableOpacity>
         </CardItem>
       </View>

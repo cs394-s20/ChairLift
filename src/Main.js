@@ -14,13 +14,6 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-// ****************************************
-// @ MARGOT + AMRO + AVA 
-// access user info via db like this! firebase.database().ref("users/" + userID + "/profile")
-// pass user state into your component and userID = user.uid
-// ****************************************
-
-
 export default function Main() {
   const [user, setUser] = useState(null);
 
@@ -106,10 +99,6 @@ function ProfileScreen({navigation, route}) {
               iconName = focused ? 'user' : 'user';
             }
 
-            
-
-
-            // You can return any component that you like here!
             return <Icon type="FontAwesome" name={iconName} /> ;
           },
         })}
@@ -149,7 +138,6 @@ const styles = StyleSheet.create({
   }, 
 
   addRideModal: {
-    // width: "10%",
     position: 'absolute',
     right: 16,
     backgroundColor:"#484848"

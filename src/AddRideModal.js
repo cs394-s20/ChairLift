@@ -16,7 +16,6 @@ const AddRideModal = ({ userState, dataState }) => {
   const updateJSON = (user) => {
     var newItemKey = db.push().key;
     const userID = user.uid;
-    
 
     var item = {
       "rideID": newItemKey,
@@ -34,12 +33,8 @@ const AddRideModal = ({ userState, dataState }) => {
       
     };
 
-    //push to rides
     firebase.database().ref("rides/" + newItemKey).set(item);
-
-    //push to users driverRides
     firebase.database().ref("users/" + user.uid + "/driverRides/" + newItemKey).set(item);  
-
     navigation.navigate('Home');
     return;
   }
@@ -159,10 +154,6 @@ const AddRideModal = ({ userState, dataState }) => {
 
               </View>
 
-              {/*<Item>
-                <Input placeholder='Departure Time' onChangeText={(departTime) => {setDepartTime(departTime)}}/>
-              </Item>*/}
-
               <Item picker>
                 <Picker mode="dropdown"
                 iosIcon={<Icon name="arrow-down" />} placeholder="Select your resort"
@@ -211,10 +202,6 @@ const AddRideModal = ({ userState, dataState }) => {
                   )}
                 </View>
               </View>
-              {/*<Item>
-                <Input placeholder='Return Time' onChangeText={(returnTime) => {setReturnTime(returnTime)}}/>
-              </Item>*/}
-
               <Item>
                 <Input placeholder='Trip Description' onChangeText={(desc) => {setDesc(desc)}}/>
               </Item>

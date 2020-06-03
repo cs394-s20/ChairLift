@@ -6,8 +6,6 @@ import db from './db.js';
 export default class SignUp extends React.Component {
   state = { email: '', password: '', fullName: '', phoneNum: '', errorMessage: null }
   handleSignUp = () => {
-    // TODO: Firebase stuff...
-    console.log('handleSignUp')
     firebase
         .auth()
         .createUserWithEmailAndPassword(this.state.email, this.state.password)

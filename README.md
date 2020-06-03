@@ -20,4 +20,8 @@ Ensure you have the Expo application downloaded to your phone. Run the following
 Then, use Expo to view the application by scanning the QR code given with your phone camera. 
 
 
-**There are no known bugs at the time with this repo.**
+## Limitations
+
+**There are no known bugs at the moment with this repo.**
+
+If you wish to continue to work on this project, important next steps include specifying whether a ride needed and/or posted is round trip or single direction in addition to adding functionality to update a user's profile.

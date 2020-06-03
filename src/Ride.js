@@ -17,8 +17,7 @@ const Ride = (rideObj) => {
     }, []);
     
     const updateJSON = () => {
-        
-      //var newSeats = rideObj.ride.seatsLeft - 1;
+
       rideObj.ride.seatsLeft--;
       var item = rideObj.ride;
       firebase.database().ref("rides/" + rideObj.ride.rideID).set(item);
@@ -36,7 +35,6 @@ const Ride = (rideObj) => {
 
       const driver = item.driverID;      
       firebase.database().ref("users/" + driver + "/driverRides/" + item.rideID).set(item);
-      // adding to passenger rides in firebase???
       firebase.database().ref("users/" + userID + "/passengerRides/" + item.rideID).set(item);
 
     };
@@ -84,10 +82,6 @@ const Ride = (rideObj) => {
     )
 }
 
-// <style>
-// @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300&display=swap');
-// </style>
-
 const styles = StyleSheet.create({
   container: {
     width: "100%",
@@ -115,7 +109,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: -6,
     backgroundColor:"#19647E",
-    //#0fbf61
     padding: 10
   },
   requestText: {
@@ -124,7 +117,5 @@ const styles = StyleSheet.create({
   }
   
 });
-
-
 
 export default Ride;

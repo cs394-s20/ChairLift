@@ -1,0 +1,381 @@
+{
+  "resorts" : {
+    "Aspen" : "Aspen",
+    "Beaver Creek" : "Beaver Creek",
+    "Breckenridge" : "Breckenridge",
+    "Copper Mountain" : "Copper Mountain",
+    "Keystone" : "Keystone",
+    "Silverton" : "Silverton",
+    "Steamboat" : "Steamboat",
+    "Telluride" : "Telluride",
+    "Vail" : "Vail",
+    "Winter Park" : "Winter Park"
+  },
+  "rides" : {
+    "-M8EAK1YW3xMnHeHV9DQ" : {
+      "departDate" : "2020-05-22",
+      "departTime" : "07:00AM",
+      "desc" : "Split gas money ",
+      "driverID" : "159y4HsAN6gVXUFIUG7GOEifvVx1",
+      "endLoc" : "Vail",
+      "name" : "Diana M",
+      "phoneNum" : "720-457-5647",
+      "returnDate" : "2020-05-25",
+      "returnTime" : "07:00",
+      "rideID" : "-M8EAK1YW3xMnHeHV9DQ",
+      "seatsLeft" : 0,
+      "startLoc" : "Castle Rock"
+    },
+    "-M8EChQpyHTLd6vz9D8Q" : {
+      "departDate" : "2020-05-29",
+      "departTime" : "09:30AM",
+      "desc" : "Buy snacks",
+      "driverID" : "159y4HsAN6gVXUFIUG7GOEifvVx1",
+      "endLoc" : "Vail",
+      "name" : "Karl J.",
+      "phoneNum" : "303-678-5439",
+      "returnDate" : "2020-05-31",
+      "returnTime" : "10:00PM",
+      "rideID" : "-M8EChQpyHTLd6vz9D8Q",
+      "seatsLeft" : 3,
+      "startLoc" : "Stapleton"
+    },
+    "-M8EE0VASClO_idjLpE0" : {
+      "departDate" : "2020-05-30",
+      "departTime" : "00:15AM",
+      "desc" : "none",
+      "driverID" : "159y4HsAN6gVXUFIUG7GOEifvVx1",
+      "endLoc" : "",
+      "name" : "Edward T.",
+      "phoneNum" : "303-124-6799",
+      "returnDate" : "2020-06-01",
+      "returnTime" : "14:00PM",
+      "rideID" : "-M8EE0VASClO_idjLpE0",
+      "seatsLeft" : 2,
+      "startLoc" : "Westwood"
+    },
+    "-M8EGIS1Zq0J8LAyRiBA" : {
+      "departDate" : "2020-06-06",
+      "departTime" : "08:00AM",
+      "desc" : "$20 for ride",
+      "driverID" : "159y4HsAN6gVXUFIUG7GOEifvVx1",
+      "endLoc" : "Vail",
+      "name" : "Susan B. ",
+      "phoneNum" : "720-122-5557",
+      "returnDate" : "2020-06-07",
+      "returnTime" : "04:30PM",
+      "rideID" : "-M8EGIS1Zq0J8LAyRiBA",
+      "seatsLeft" : 0,
+      "startLoc" : "Golden"
+    },
+    "-M8EGqW7DAdBtzRKFpgQ" : {
+      "departDate" : "2020-06-05",
+      "departTime" : "09:45AM",
+      "desc" : "none",
+      "driverID" : "159y4HsAN6gVXUFIUG7GOEifvVx1",
+      "endLoc" : "Vail",
+      "name" : "Andrea Y.",
+      "phoneNum" : "720-457-4446",
+      "returnDate" : "2020-06-07",
+      "returnTime" : "13:00",
+      "rideID" : "-M8EGqW7DAdBtzRKFpgQ",
+      "seatsLeft" : 0,
+      "startLoc" : "Westwood"
+    },
+    "-M8EHcgB1_cJ0hFy4D0S" : {
+      "departDate" : "2020-05-31",
+      "departTime" : "11:30AM",
+      "desc" : "Flexible pickup time ",
+      "driverID" : "159y4HsAN6gVXUFIUG7GOEifvVx1",
+      "endLoc" : "Vail",
+      "name" : "Ryan H.",
+      "phoneNum" : "303-324-1122",
+      "returnDate" : "2020-06-01",
+      "returnTime" : "21:00PM",
+      "rideID" : "-M8EHcgB1_cJ0hFy4D0S",
+      "seatsLeft" : 2,
+      "startLoc" : "Golden"
+    },
+    "-M8kiCXlyzv8cye7uD1W" : {
+      "departDate" : "2020-06-04",
+      "departTime" : "07:00",
+      "desc" : "Split gas money",
+      "driverID" : "L9Ei4EQyBthJgG8AnMqa0rqJ54K2",
+      "endLoc" : "Vail",
+      "name" : "Ava Robinson",
+      "phoneNum" : "402-321-7304",
+      "returnDate" : "2020-06-06",
+      "returnTime" : "19:00",
+      "rideID" : "-M8kiCXlyzv8cye7uD1W",
+      "seatsLeft" : "2",
+      "startLoc" : "349 Via De Vista"
+    },
+    "-M8lV_dU2_ymIhBTaWox" : {
+      "departDate" : "2020-06-02",
+      "departTime" : "07:00",
+      "desc" : "",
+      "driverID" : "38iAop5y4Te1mYXkpZqwiGvrFUZ2",
+      "endLoc" : "Vail",
+      "name" : "Margot Sobota",
+      "phoneNum" : "440-465-4606",
+      "returnDate" : "2020-06-03",
+      "returnTime" : "07:00",
+      "rideID" : "-M8lV_dU2_ymIhBTaWox",
+      "seatsLeft" : "4",
+      "startLoc" : "Boulder"
+    },
+    "-M8lh5SpNYXVlY3Gqhhs" : {
+      "departDate" : "2020-06-04",
+      "departTime" : "07:00",
+      "desc" : "Split gas money",
+      "driverID" : "TaBALLQtIgTPGOwnWI5SjdwxeSB3",
+      "endLoc" : "Vail",
+      "name" : "Ava Robinson ",
+      "phoneNum" : "402-321-7304",
+      "returnDate" : "2020-06-05",
+      "returnTime" : "07:00",
+      "rideID" : "-M8lh5SpNYXVlY3Gqhhs",
+      "seatsLeft" : 1,
+      "startLoc" : "349 Via De Vista"
+    }
+  },
+  "users" : {
+    "159y4HsAN6gVXUFIUG7GOEifvVx1" : {
+      "driverRides" : {
+        "-M8EGqW7DAdBtzRKFpgQ" : {
+          "departDate" : "2020-06-05",
+          "departTime" : "09:45AM",
+          "desc" : "none",
+          "driverID" : "159y4HsAN6gVXUFIUG7GOEifvVx1",
+          "endLoc" : "Vail",
+          "name" : "Andrea Y.",
+          "phoneNum" : "720-457-4446",
+          "requested" : {
+            "TaBALLQtIgTPGOwnWI5SjdwxeSB3" : "pending"
+          },
+          "returnDate" : "2020-06-07",
+          "returnTime" : "13:00",
+          "rideID" : "-M8EGqW7DAdBtzRKFpgQ",
+          "seatsLeft" : 0,
+          "startLoc" : "Westwood"
+        }
+      }
+    },
+    "38iAop5y4Te1mYXkpZqwiGvrFUZ2" : {
+      "driverRides" : {
+        "-M8lV_dU2_ymIhBTaWox" : {
+          "departDate" : "2020-06-02",
+          "departTime" : "07:00",
+          "desc" : "",
+          "driverID" : "38iAop5y4Te1mYXkpZqwiGvrFUZ2",
+          "endLoc" : "Vail",
+          "name" : "Margot Sobota",
+          "phoneNum" : "440-465-4606",
+          "returnDate" : "2020-06-03",
+          "returnTime" : "07:00",
+          "rideID" : "-M8lV_dU2_ymIhBTaWox",
+          "seatsLeft" : "4",
+          "startLoc" : "Boulder"
+        }
+      },
+      "passengerRides" : {
+        "-M8lh5SpNYXVlY3Gqhhs" : {
+          "departDate" : "2020-06-04",
+          "departTime" : "07:00",
+          "desc" : "Split gas money",
+          "driverID" : "TaBALLQtIgTPGOwnWI5SjdwxeSB3",
+          "endLoc" : "Vail",
+          "name" : "Ava Robinson ",
+          "phoneNum" : "402-321-7304",
+          "requested" : {
+            "38iAop5y4Te1mYXkpZqwiGvrFUZ2" : "pending"
+          },
+          "returnDate" : "2020-06-05",
+          "returnTime" : "07:00",
+          "rideID" : "-M8lh5SpNYXVlY3Gqhhs",
+          "seatsLeft" : 1,
+          "startLoc" : "349 Via De Vista"
+        }
+      },
+      "profile" : {
+        "email" : "margaretsobota@gmail.com",
+        "name" : "Margot Sobota",
+        "phoneNum" : "440-465-4606"
+      }
+    },
+    "L9Ei4EQyBthJgG8AnMqa0rqJ54K2" : {
+      "driverRides" : {
+        "-M8kiCXlyzv8cye7uD1W" : {
+          "departDate" : "2020-06-04",
+          "departTime" : "07:00",
+          "desc" : "Split gas money",
+          "driverID" : "L9Ei4EQyBthJgG8AnMqa0rqJ54K2",
+          "endLoc" : "Vail",
+          "name" : "Ava Robinson",
+          "phoneNum" : "402-321-7304",
+          "returnDate" : "2020-06-06",
+          "returnTime" : "19:00",
+          "rideID" : "-M8kiCXlyzv8cye7uD1W",
+          "seatsLeft" : "2",
+          "startLoc" : "349 Via De Vista"
+        }
+      },
+      "profile" : {
+        "email" : "avamrobinson@gmail.com",
+        "name" : "Ava Robinson",
+        "phoneNum" : "402-321-7304"
+      }
+    },
+    "Rtzd30PTmpXq3EvAA6OIeibmInQ2" : {
+      "profile" : {
+        "email" : "ashmeikamro@gmail.com",
+        "name" : "Amro Ashmeik",
+        "phoneNum" : "5103787673"
+      }
+    },
+    "TaBALLQtIgTPGOwnWI5SjdwxeSB3" : {
+      "driverRides" : {
+        "-M8lh5SpNYXVlY3Gqhhs" : {
+          "departDate" : "2020-06-04",
+          "departTime" : "07:00",
+          "desc" : "Split gas money",
+          "driverID" : "TaBALLQtIgTPGOwnWI5SjdwxeSB3",
+          "endLoc" : "Vail",
+          "name" : "Ava Robinson ",
+          "phoneNum" : "402-321-7304",
+          "requested" : {
+            "38iAop5y4Te1mYXkpZqwiGvrFUZ2" : "pending"
+          },
+          "returnDate" : "2020-06-05",
+          "returnTime" : "07:00",
+          "rideID" : "-M8lh5SpNYXVlY3Gqhhs",
+          "seatsLeft" : 1,
+          "startLoc" : "349 Via De Vista"
+        }
+      },
+      "passengerRides" : {
+        "-M8EGqW7DAdBtzRKFpgQ" : {
+          "departDate" : "2020-06-05",
+          "departTime" : "09:45AM",
+          "desc" : "none",
+          "driverID" : "159y4HsAN6gVXUFIUG7GOEifvVx1",
+          "endLoc" : "Vail",
+          "name" : "Andrea Y.",
+          "phoneNum" : "720-457-4446",
+          "requested" : {
+            "TaBALLQtIgTPGOwnWI5SjdwxeSB3" : "pending"
+          },
+          "returnDate" : "2020-06-07",
+          "returnTime" : "13:00",
+          "rideID" : "-M8EGqW7DAdBtzRKFpgQ",
+          "seatsLeft" : 0,
+          "startLoc" : "Westwood"
+        }
+      },
+      "profile" : {
+        "email" : "avarobinson2021@u.northwestern.edu",
+        "name" : "Ava Robinson ",
+        "phoneNum" : "402-321-7304"
+      }
+    },
+    "W46njQRgTSa2EF054tG6UgCorM62" : {
+      "profile" : {
+        "email" : "ashley@gmail.com",
+        "name" : "Ashley 2",
+        "phoneNum" : "2392037490"
+      }
+    },
+    "Y1jqVYSkPCTacrJFQ9gcugcntYx1" : {
+      "profile" : {
+        "email" : "johndoe@gmail.com",
+        "name" : "John",
+        "phoneNum" : "Doe"
+      }
+    },
+    "eiH8PEyiBQRwtA54GMf0N0fFrFJ3" : {
+      "profile" : {
+        "email" : "k6@gmail.com",
+        "name" : "k6",
+        "phoneNum" : "1231231234"
+      }
+    },
+    "mXyimcEJaycmJFFamZz02D3fSIu1" : {
+      "driverRides" : {
+        "-M8e0xk_shM4KqcpvdFl" : {
+          "departDate" : "2020-05-31",
+          "departTime" : "07:00",
+          "desc" : "blah blah blah",
+          "driverID" : "mXyimcEJaycmJFFamZz02D3fSIu1",
+          "endLoc" : "hilton",
+          "name" : "karen",
+          "phoneNum" : "(925)786-8971",
+          "requested" : {
+            "mXyimcEJaycmJFFamZz02D3fSIu1" : "pending"
+          },
+          "returnDate" : "2020-05-31",
+          "returnTime" : "07:00",
+          "rideID" : "-M8e0xk_shM4KqcpvdFl",
+          "seatsLeft" : 2,
+          "startLoc" : "hawaii"
+        }
+      },
+      "passengerRides" : {
+        "-M8EAK1YW3xMnHeHV9DQ" : {
+          "departDate" : "2020-05-22",
+          "departTime" : "07:00AM",
+          "desc" : "Split gas money ",
+          "driverID" : "159y4HsAN6gVXUFIUG7GOEifvVx1",
+          "endLoc" : "Vail",
+          "name" : "Diana M",
+          "phoneNum" : "720-457-5647",
+          "requested" : {
+            "mXyimcEJaycmJFFamZz02D3fSIu1" : "pending"
+          },
+          "returnDate" : "2020-05-25",
+          "returnTime" : "07:00",
+          "rideID" : "-M8EAK1YW3xMnHeHV9DQ",
+          "seatsLeft" : 1,
+          "startLoc" : "Castle Rock"
+        }
+      },
+      "profile" : {
+        "email" : "puppys327@gmail.com",
+        "name" : "Karen Bao",
+        "phoneNum" : "(925)786-8971"
+      }
+    },
+    "rIk7VPlz8QM8g7bLkhoKvyo9kDq2" : {
+      "profile" : {
+        "email" : "ashley39@gmail.com",
+        "name" : "Ashley 3",
+        "phoneNum" : "2389238042"
+      }
+    },
+    "uYabSmgkoZRbnHJpnwnGV1TxZ632" : {
+      "driverRides" : {
+        "-M8Yzi14qQu-ycgAHo6v" : {
+          "departDate" : "2020-05-29",
+          "departTime" : "07:00",
+          "desc" : "Testing",
+          "driverID" : "uYabSmgkoZRbnHJpnwnGV1TxZ632",
+          "endLoc" : "Chicago Hilton",
+          "name" : "Ashley Ahn",
+          "phoneNum" : "5629913412",
+          "requested" : {
+            "rIk7VPlz8QM8g7bLkhoKvyo9kDq2" : "pending"
+          },
+          "returnDate" : "2020-05-29",
+          "returnTime" : "19:00",
+          "rideID" : "-M8Yzi14qQu-ycgAHo6v",
+          "seatsLeft" : 1,
+          "startLoc" : "Evanston"
+        }
+      },
+      "profile" : {
+        "email" : "ashleyjsahn@gmail.com",
+        "name" : "Ashley Ahn",
+        "phoneNum" : "5629913412"
+      }
+    }
+  }
+}

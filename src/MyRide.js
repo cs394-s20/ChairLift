@@ -76,10 +76,6 @@ const MyRide = ({ride, dataState}) => {
     )
 }
 
-// <style>
-// @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300&display=swap');
-// </style>
-
 const styles = StyleSheet.create({
   container: {
     width: "100%",
@@ -107,7 +103,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: -6,
     backgroundColor:"#19647E",
-    //#0fbf61
     padding: 10
   },
   requestText: {

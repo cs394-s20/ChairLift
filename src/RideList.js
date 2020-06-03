@@ -3,14 +3,9 @@ import Ride from './Ride.js';
 import db from './db.js';
 import { StyleSheet, Text, View } from 'react-native';
 import { Container, Header, Content, List, ListItem, Card, Picker, Icon } from 'native-base';
+import { createStackNavigator } from '@react-navigation/stack';
 
-// const useStyles = makeStyles((theme) => ({
-//     root: {
-//       width: '100%',
-//       maxWidth: 360,
-//       backgroundColor: theme.palette.background.paper,
-//     },
-//   }));
+const Stack = createStackNavigator();
 
 const getCurrentDate = () => {
   var date = new Date().getDate();
@@ -41,9 +36,7 @@ const Rides = ({rides, resortFilter}) => {
           }   
           </List>
         </Content>
-
     )
-
 }
 
 const RideList = ({dataState}) => {
@@ -102,7 +95,3 @@ const styles = StyleSheet.create({
 });
 
 export default RideList; 
-
-import { createStackNavigator } from '@react-navigation/stack';
-
-const Stack = createStackNavigator();

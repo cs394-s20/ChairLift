@@ -4,8 +4,10 @@
 
 Begin by cloning the repo and navigating into the directory:
 
-`$ git clone {repo id}`
-`$ cd ChairLift`
+```
+$ git clone {repo id}
+$ cd ChairLift
+```
 
 Next, create a Firebase account and initialize the repo as a Firebase web project (do not add Firebase hosting). If Firebase is new to you, [this] (https://courses.cs.northwestern.edu/394/firebase-notes.php) is a good resource to help you get started. Ensure that a .firebaserc file has been created in the root of the directory contianing the application name. Enable email/password authentication through the Firebase console. Additionally, enable the realtime database from the Firebase console. Upload the mockData.json file to the database to populate mock data into the app to get started. Proceed to copy and paste the database credentials from the Firebase web console into line 5 of db.js (see commented out code for the relevant credentials to add).
 

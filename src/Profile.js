@@ -22,10 +22,12 @@ const Profile = ({userState}) => {
     if (user != null) {
         userID = firebase.auth().uid;
         profileItem = firebase.database().ref("users/" + userID + "/profile");
+        console.log("user", user);
         return (
             <Container style={styles.container}>
                 <View>
-                    <Text>This is your profile page</Text>
+                    <Text>This is {user.displayName}'s profile page</Text>
+                    <Text>{user.phoneNumber}</Text>
                     <Button light onPress={() => firebase.auth().signOut()}><Text>Sign Out</Text></Button>
                 </View>
             </Container>

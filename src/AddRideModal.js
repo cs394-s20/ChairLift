@@ -7,7 +7,7 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-const AddRideModal = ({ userState, dataState }) => {
+const AddRideModal = ({ navigation, userState, dataState }) => {
   const [user, setUser] = [userState.user, userState.setUser];
   const [data, setData] = [dataState.data, dataState.setData];
 

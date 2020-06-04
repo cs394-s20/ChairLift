@@ -50,7 +50,7 @@ function HomeScreen({ navigation, route }) {
 
 function AddRideModalScreen({navigation, route}) {
   return (
-  <AddRideModal userState={{user, setUser}} dataState={{data, setData}}>
+  <AddRideModal navigation={navigation} userState={{user, setUser}} dataState={{data, setData}}>
   </AddRideModal>
   )
 }
